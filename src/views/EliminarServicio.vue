@@ -1,17 +1,19 @@
 <template>
     <DashBoardAdmin />
-    <div class="main-content" style="margin-left: 300px;"> 
+    <div class="main-content" style="margin-left: 300px; " > 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-     <tr v-for="usuario in usuarios" :key="usuario.id">
-      <td scope="row">{{usuario.id}}</td>
-      <td>{{usuario.name}}</td>
-      <td>{{usuario.document}} </td>
+     <tr v-for="servicio in servicios" :key="servicio.id">
+      <td scope="row">{{servicio.id}}</td>
+      <td>{{servicio.name}}</td>
+      
       <td>
           <div class="btn-group" role="group" aria-label="">
-              <button type="button" v-on:click="borrarUsuario(usuario.id)" class="btn btn-danger">Borrar</button>
+              <button type="button" v-on:click="borrarServicio(servicio.id)" class="btn btn-danger">Borrar</button>
           </div>
       </td>
+   
         </tr>
+
    </div>
    <div class="alert alert-success fixed-bottom mx-auto" v-if="mostrarMensaje">
       {{ mensaje }}
@@ -29,7 +31,7 @@
       return {
         mensaje: "",
         userId: '',
-        usuarios: [],
+        servicios: [],
         mostrarMensaje: false,
       };
     },
@@ -38,45 +40,45 @@
     },
     methods: {
       consultarUsuarios(){
-            // Envía los datos a la API utilizando fetch
-        //const operation = "queryUserByEntity";
-        //const tna = 7;
-        //const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
-        //const userEntityId = 89;
+                // Envía los datos a la API utilizando fetch
+        const operation = "queryServiceByEntity";
+        const tna = 7;
+        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
+        const entityIdService = 89;
         fetch(
-          //`https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&idEntity=${userEntityId}&key=${key}`,
-          `https://redb.qsystems.co/QS3100/QServlet?operation=queryUserByEntity&tna=7&key=c94ad623-f583-46ed-b5e0-54f402e83ad0&userEntityId=89`,
+          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&entityIdService=${entityIdService}&key=${key}`,
+          
           { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
         )
         .then(respuesta=>respuesta.json())
         .then((datosRespuesta)=>{
-          const usuarios = datosRespuesta.arrayUser;
-          console.log(usuarios); 
-          this.usuarios = datosRespuesta.arrayUser;
+          const servicios = datosRespuesta.arrayService;
+          console.log(servicios); 
+          this.servicios = datosRespuesta.arrayService;
         })
         .catch(console.log)
     },
 
-    borrarUsuario(id) {
+    borrarServicio(id) {
         // Envía los datos a la API utilizando fetch
-        const operation = "DeleteUser";
+        const operation = "DeleteService";
         const tna = 7;
         const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
   
         fetch(
-          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&userId=${id}&key=${key}`,
+          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&idService=${id}&key=${key}`,
           { method: "POST" } // Puedes ajustar el método HTTP según sea necesario
         )
           .then((respuesta) => respuesta.json())
           .then((datosRespuesta) => {
-            console.log(datosRespuesta);
             this.mensaje = datosRespuesta.message;
             this.mostrarMensaje = true;
+            console.log(datosRespuesta);
             setTimeout(() => {
               this.mostrarMensaje = false; // Ocultar el mensaje
               this.mensaje = ""; // Limpiar el mensaje
             }, 5000);
-        
+   
             this.consultarUsuarios();
           })
           .catch(console.log);

@@ -21,8 +21,9 @@
  <div class="navbar navbar-dark bg-dark shadow-sm">
    <div class="container">
      <a href="#" class="navbar-brand d-flex align-items-center">
-       <img  src="../assets/img1.png" alt="Card image cap" class="img-fluid" style="max-height: 50px;">
-       <strong>BioCodeInnovators</strong>
+      <div><img  src="../assets/img1.png" alt="Card image cap" class="img-fluid" style="max-height: 50px;"></div>
+      <div><strong>BioCodeInnovators</strong></div>
+       
      </a>
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
@@ -91,10 +92,6 @@
          <div class="col-lg-6 col-md-8 mx-auto">
            <h1 class="fw-light">Quienes somos</h1>
            <p class="lead text-body-secondary">Fundada con la visión de fusionar la biotecnología y el código, nuestra empresa se ha convertido en un referente en el mundo del desarrollo web. Nuestro equipo de expertos en diseño, programación y marketing digital trabaja incansablemente para transformar ideas en realidades digitales impactantes. Desde sitios web a medida hasta aplicaciones interactivas, en bioCode Innovators, creamos soluciones web que no solo impresionan visualmente, sino que también impulsan el éxito de nuestros clientes en el mundo en línea. ¡Únete a nosotros en este emocionante viaje hacia un futuro digital más brillante!</p>
-           <p>
-             <a href="#" class="btn btn-primary my-2">Main call to action</a>
-             <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-           </p>
          </div>
        </div>
    </section>
