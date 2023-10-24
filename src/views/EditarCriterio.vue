@@ -103,7 +103,7 @@
         </div>
       </div>
     </div>
-    <input type="text" class="form-control" id="idCriteria" v-model="idCriteria" required >
+    <input type="text" class="form-control" id="idCriteria" v-model="idCriteria" hidden required >
       <small class="d-block text-end mt-3">
         <button type="submit" class="btn btn-primary">Guardar</button>
       </small>
