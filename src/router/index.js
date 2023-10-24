@@ -15,6 +15,7 @@ import EditarEstandar from '../views/EditarEstandar.vue'
 import EliminarEstandar from '../views/EliminarEstandar.vue'
 //criterios
 import CrearCriterios from '../views/CrearCriterios.vue'
+import EditarCriterio from '../views/EditarCriterio.vue'
 
 
 
@@ -79,6 +80,11 @@ const routes = [
     path: '/CrearCriterios',
     name: 'CrearCriterios',
     component: CrearCriterios
+  },
+  {
+    path: '/EditarCriterio',
+    name: 'EditarCriterio',
+    component: EditarCriterio
   },
  
 ]

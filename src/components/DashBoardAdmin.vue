@@ -52,7 +52,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/EditarServicio" class="nav-link">
+                <router-link to="/EditarCriterios" class="nav-link">
                   <i class="fas fa-edit"></i> Editar Servicio
                 </router-link>
               </li>
@@ -113,7 +113,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/EditarEstandar" class="nav-link">
+                <router-link to="/EditarCriterio" class="nav-link">
                   <i class="fas fa-edit"></i> Editar Criterios
                 </router-link>
               </li>
