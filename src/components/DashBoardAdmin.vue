@@ -1,4 +1,16 @@
 <template>
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">Adminstrador</li>
+        
+      </ul>
+    </header>
+  </div>
   <div class="sidebar" style="background-color: #add8e6;">
     <div class="sidebar-header">
       <h4 style="color: #0000FF;">Biocodeinnovators</h4>
@@ -17,18 +29,8 @@
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <ul class="nav flex-column">
               <li>
-                <router-link to="/CrearUsuario" class="nav-link">
-                  <i class="fas fa-plus"></i> Crear Usuario
-                </router-link>
-              </li>
-              <li>
                 <router-link to="/EditarUsuario" class="nav-link">
-                  <i class="fas fa-edit"></i> Editar Usuarios
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/EliminarUsuario" class="nav-link">
-                  <i class="fas fa-trash"></i> Eliminar Usuarios
+                  <i class="fas fa-edit"></i> Usuarios
                 </router-link>
               </li>
             </ul>
@@ -47,79 +49,8 @@
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
             <ul class="nav flex-column">
               <li>
-                <router-link to="/CrearServicio" class="nav-link">
-                  <i class="fas fa-plus"></i> Crear Servicio
-                </router-link>
-              </li>
-              <li>
                 <router-link to="/EditarServicio" class="nav-link">
-                  <i class="fas fa-edit"></i> Editar Servicio
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/EliminarServicio" class="nav-link">
-                  <i class="fas fa-trash"></i> Eliminar Servicio
-                </router-link>
-              </li>
-            </ul>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-pulse" viewBox="0 0 16 16">
-            <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
-            <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
-            <path d="M9.979 5.356a.5.5 0 0 0-.968.04L7.92 10.49l-.94-3.135a.5.5 0 0 0-.926-.08L4.69 10H4.5a.5.5 0 0 0 0 1H5a.5.5 0 0 0 .447-.276l.936-1.873 1.138 3.793a.5.5 0 0 0 .968-.04L9.58 7.51l.94 3.135A.5.5 0 0 0 11 11h.5a.5.5 0 0 0 0-1h-.128L9.979 5.356Z"/>
-          </svg>
-          Estándares
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <ul class="nav flex-column">
-              <li>
-                <router-link to="/CrearEstandar" class="nav-link">
-                  <i class="fas fa-plus"></i> Crear Estándar
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/EditarEstandar" class="nav-link">
-                  <i class="fas fa-edit"></i> Editar Estándar
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/EliminarEstandar" class="nav-link">
-                  <i class="fas fa-trash"></i> Eliminar Estándar
-                </router-link>
-              </li>
-            </ul>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-          <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-        </svg>
-          Criterios
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <ul class="nav flex-column">
-              <li>
-                <router-link to="/CrearCriterios" class="nav-link">
-                  <i class="fas fa-plus"></i> Crear Criterios
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/EditarCriterio" class="nav-link">
-                  <i class="fas fa-edit"></i> Editar Criterios
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/EliminarEstandar" class="nav-link">
-                  <i class="fas fa-trash"></i> Eliminar Criterios
+                  <i class="fas fa-edit"></i>Servicios
                 </router-link>
               </li>
             </ul>

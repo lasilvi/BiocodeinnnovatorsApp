@@ -2,19 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashBoardAdmin from '../components/DashBoardAdmin.vue'
 //import LoginView from '../components/LoginView.vue'
-import CrearUsuario from '../views/CrearUsuario.vue'
+//usuarios
 import EditarUsuario from '../views/EditarUsuario.vue'
-import EliminarUsuario from '../views/EliminarUsuario.vue'
 //servicios
-import CrearServicio from '../views/CrearServicio.vue'
 import EditarServicio from '../views/EditarServicio.vue'
-import EliminarServicio from '../views/EliminarServicio.vue'
 //estándares
-import CrearEstandar from '../views/CrearEstandar.vue'
+
 import EditarEstandar from '../views/EditarEstandar.vue'
-import EliminarEstandar from '../views/EliminarEstandar.vue'
 //criterios
-import CrearCriterios from '../views/CrearCriterios.vue'
 import EditarCriterio from '../views/EditarCriterio.vue'
 
 
@@ -32,24 +27,9 @@ const routes = [
     component: DashBoardAdmin
   },
   {
-    path: '/CrearUsuario',
-    name: 'CrearUsuario',
-    component: CrearUsuario
-  },
-  {
-    path: '/EliminarUsuario',
-    name: 'EliminarUsuario',
-    component: EliminarUsuario
-  },
-  {
     path: '/EditarUsuario',
     name: 'EditarUsuario',
     component: EditarUsuario
-  },
-  {
-    path: '/CrearServicio',
-    name: 'CrearServicio',
-    component: CrearServicio
   },
   {
     path: '/EditarServicio',
@@ -57,32 +37,12 @@ const routes = [
     component: EditarServicio
   },
   {
-    path: '/EliminarServicio',
-    name: 'EliminarServicio',
-    component: EliminarServicio
-  },
-  {
-    path: '/CrearEstandar',
-    name: 'CrearEstandar',
-    component: CrearEstandar
-  },
-  {
-    path: '/EditarEstandar',
+    path: '/EditarEstandar/:id',
     name: 'EditarEstandar',
     component: EditarEstandar
   },
   {
-    path: '/EliminarEstandar',
-    name: 'EliminarEstandar',
-    component: EliminarEstandar
-  },
-  {
-    path: '/CrearCriterios',
-    name: 'CrearCriterios',
-    component: CrearCriterios
-  },
-  {
-    path: '/EditarCriterio',
+    path: '/EditarCriterio/:ide/:ids',
     name: 'EditarCriterio',
     component: EditarCriterio
   },
