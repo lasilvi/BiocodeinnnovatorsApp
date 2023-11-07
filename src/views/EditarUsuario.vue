@@ -188,7 +188,7 @@
           <select v-model="userType" class="form-select" required>
             <option value="1">Administrador</option>
             <option value="2">Usuario</option>
-            <option value="3">Editor</option>
+            <option value="3">Auditor</option>
           </select>
         </div>
       </div>

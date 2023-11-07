@@ -95,6 +95,16 @@ export default {
                 this.$router.push({name:'DashBoardAdmin'});
              
               }
+              if(this.datos_Respuesta.userType==2){
+           
+                  this.$router.push({name:'DashBoardUser'});
+                
+              }
+              if(this.datos_Respuesta.userType==3){
+           
+                  this.$router.push({name:'DashBoardAuditor'});
+                
+              }
               else {
               
             //if (this.username === 'Entidad' && this.password === 'contraseña') {
