@@ -33,6 +33,10 @@
             <button type="button" v-on:click="mostrarFormularioDeEdicion(estandar)" class="btn btn-primary">Editar</button>
             <button type="button" v-on:click="borrarEstandar(estandar.id)" class="btn btn-danger">Borrar</button>
             <a :href="'/EditarCriterio/' + estandar.id + '/' + servicioId">Ver</a>
+            <form @submit="subirArchivo($event,estandar.id)" enctype="multipart/form-data">
+                <input type="file" name="archivo">
+                <button type="submit">Cargar archivo</button>
+            </form>
           </div>
         </td>
       </tr>
@@ -293,6 +297,37 @@ export default {
         
         this.userId = '';
       },
+
+    
+    subirArchivo(event,estandarID) {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append('urlFile', event.target.elements.archivo.files[0]);
+        formData.append('fileIdStandard', estandarID);
+        // Puedes agregar otros datos al formulario si es necesario
+        formData.append('descriptionFile', 'nombre-del-archivo');
+        formData.append('nameFile', 'nombre-del-archivo');
+        formData.append('fileIdCriteria', '');
+        //
+        formData.append('operation', 'SaveFile');
+        formData.append('tna', 7);
+        formData.append('key', 'c94ad623-f583-46ed-b5e0-54f402e83ad0');
+
+        console.log('Datos del formulario:', formData);
+
+        fetch('https://redb.qsystems.co/QS3100/QServlet', {
+            method: 'POST',
+            body: formData
+        })
+        .then((respuesta) => respuesta.json())
+        .then((datosRespuesta) => {
+          console.log(datosRespuesta);
+          
+        })
+        .catch(console.log);
+    }
+
+
  },
 };
 

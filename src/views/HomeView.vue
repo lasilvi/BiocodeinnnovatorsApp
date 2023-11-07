@@ -44,7 +44,7 @@
                 de habilitación, definir los servicios que serán evaluados y proporcionar herramientas como listas
                 de chequeo para garantizar el cumplimiento de las condiciones de habilitación en la atención médica
                </p>
-               <router-link to="/DashBoardAdmin"  class="btn btn-outline-primary">
+               <router-link to="/Login"  class="btn btn-outline-primary">
                  <i class="fas fa-trash"></i> Ingresar
                </router-link>
              </div>

@@ -12,10 +12,16 @@ import EditarEstandar from '../views/EditarEstandar.vue'
 //criterios
 import EditarCriterio from '../views/EditarCriterio.vue'
 
-
+//login
+import LoginView from '../components/LoginView.vue'
 
 
 const routes = [
+  {
+    path: '/Login',
+    name: 'Login',
+    component: LoginView
+  },
   {
     path: '/',
     name: 'home',
