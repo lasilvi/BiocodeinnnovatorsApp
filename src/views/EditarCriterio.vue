@@ -44,7 +44,7 @@
         </select>
       </td>
       <td>
-        <button  v-on:click="guardarNuevoCriterio" class="btn btn-primary">Nuevo Criterio</button>
+        <button  v-on:click="guardarNuevoCriterio" class="btn btn-success">Nuevo Criterio</button>
       </td>
     </tr>
             <tr v-for="criterio in criterios" :key="criterio.id">

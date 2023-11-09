@@ -3,7 +3,7 @@
    <div class="main-content" style="margin-left: 300px;"> 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
     <div class="d-flex justify-content-between">
-        <button type="button" v-on:click="mostrarFormularioDeCreacion()" class="btn btn-primary">Nuevo</button>
+        <button type="button" v-on:click="mostrarFormularioDeCreacion()" class="btn btn-success">Nuevo</button>
           <button type="button" class="btn btn-primary" v-on:click="volverAPaginaAnterior()">Volver</button>
     </div>
     <div class="row">
@@ -20,6 +20,7 @@
         <th scope="col">ID</th>
         <th scope="col">Descripción</th>
         <th scope="col">Acciones</th>
+        <th scope="col">Anexos</th>
       </tr>
     </thead>
     <tbody>
@@ -27,18 +28,20 @@
         <td>{{ estandar.name }}</td>
         <td>{{ estandar.id }}</td>
         <td>{{ estandar.description }}</td>
-        <td>{{ servicioId }}</td>
         <td>
           <div class="btn-group" role="group" aria-label="">
             <button type="button" v-on:click="mostrarFormularioDeEdicion(estandar)" class="btn btn-primary">Editar</button>
             <button type="button" v-on:click="borrarEstandar(estandar.id)" class="btn btn-danger">Borrar</button>
-            <a :href="'/EditarCriterio/' + estandar.id + '/' + servicioId">Ver</a>
-            <form @submit="subirArchivo($event,estandar.id)" enctype="multipart/form-data">
-                <input type="file" name="archivo">
-                <button type="submit">Cargar archivo</button>
-            </form>
+            <a :href="'/EditarCriterio/' + estandar.id + '/' + servicioId" style="background-color: yellow; color: black; padding: 10px 20px; text-decoration: none; border: none; border-radius: 5px;">Ver</a>
+
           </div>
         </td>
+        <td>
+        <form @submit="subirArchivo($event,estandar.id)" enctype="multipart/form-data">
+                <input type="file" class="form-control" name="archivo">
+                <button type="submit" class="btn btn-secondary">Cargar archivo</button>
+            </form>
+          </td>
       </tr>
     </tbody>
   </table>
@@ -138,7 +141,8 @@ export default {
     nameStandard: "",
     descriptionStandard: "",
     serviceIdStandard: "",
-    idStandard: ""
+    idStandard: "",
+    archivo: ''
    
    };
  },
@@ -243,8 +247,7 @@ export default {
       const nameStandard= this.nameStandard;
       const descriptionStandard= this.descriptionStandard;
       const serviceIdStandard =this.servicioId;
-    
-     
+
       
       // Envía los datos a la API utilizando fetch
       const operation = "SaveStandard";
@@ -303,6 +306,8 @@ export default {
         event.preventDefault();
         const formData = new FormData();
         formData.append('urlFile', event.target.elements.archivo.files[0]);
+
+        console.log(formData.get('urlFile'));
         formData.append('fileIdStandard', estandarID);
         // Puedes agregar otros datos al formulario si es necesario
         formData.append('descriptionFile', 'nombre-del-archivo');

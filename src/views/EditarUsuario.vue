@@ -1,7 +1,7 @@
 <template>
     <DashBoardAdmin />
    <div class="main-content" style="margin-left: 300px;"> 
-    <div class="my-3 p-3 bg-body rounded shadow-sm"><button type="button" v-on:click="mostrarFormularioDecreacion" class="btn btn-primary">Crear Usuario</button></div>
+    <div class="my-3 p-3 bg-body rounded shadow-sm"><button type="button" v-on:click="mostrarFormularioDecreacion" class="btn btn-success">Crear Usuario</button></div>
     
     <div class="my-3 p-3 bg-body rounded shadow-sm">
     <table class="table">
@@ -63,7 +63,7 @@
          <strong class="text-gray-dark">Contraseña</strong>
        </div>
        <div class="form-group">
-         <input type="password" placeholder="Contraseña" class="form-control" id="phoneEntity" v-model="passwordUser" required>
+         <input type="password" placeholder="Contraseña" class="form-control" id="phoneEntity" v-model="passwordUser" hidden required>
        </div>
      </div>
    </div>
