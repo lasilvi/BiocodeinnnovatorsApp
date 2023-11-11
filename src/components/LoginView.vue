@@ -83,7 +83,7 @@ export default {
               console.log("datos_Respuesta: ", this.datos_Respuesta);
               console.log("Estado:",this.estado);
               console.log("Comparación True",this.estado==true);
-              console.log("Estado:",this.password);
+              console.log("Contraseña:",this.password);
 
               if (this.estado){
 

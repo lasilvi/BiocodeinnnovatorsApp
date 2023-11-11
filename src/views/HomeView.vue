@@ -23,11 +23,14 @@
      <a href="#" class="navbar-brand d-flex align-items-center">
       <div><img  src="../assets/img1.png" alt="Card image cap" class="img-fluid" style="max-height: 50px;"></div>
       <div><strong>BioCodeInnovators</strong></div>
-       
      </a>
+     <router-link to="/Login"  class="btn btn-outline-primary">
+        <i class="fas fa-trash"></i> Ingresar
+      </router-link>
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
      </button>
+     
    </div>
  </div>
 </header>   
@@ -44,9 +47,7 @@
                 de habilitación, definir los servicios que serán evaluados y proporcionar herramientas como listas
                 de chequeo para garantizar el cumplimiento de las condiciones de habilitación en la atención médica
                </p>
-               <router-link to="/Login"  class="btn btn-outline-primary">
-                 <i class="fas fa-trash"></i> Ingresar
-               </router-link>
+             
              </div>
            </div>
          </div>
@@ -62,9 +63,7 @@
                 para garantizar que la organización cumpla con los estándares y pueda proporcionar 
                 servicios de alta calidad y seguridad.
                </p>
-               <router-link to="/DashBoardAdmin"  class="btn btn-outline-primary">
-                 <i class="fas fa-trash"></i> Ingresar
-               </router-link>
+               
              </div>
            </div>
          </div>
@@ -79,9 +78,7 @@
                 Permitiendo colaborar a que las organizaciones cumplan con los requisitos establecidos y mantengan altos estándares de calidad 
                 y seguridad en la atención médica que brindan.
                </p>
-               <router-link to="/DashBoardAdmin"  class="btn btn-outline-primary">
-                 <i class="fas fa-trash"></i> Ingresar
-               </router-link>
+            
              </div>
            </div>
          </div>
