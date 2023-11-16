@@ -70,6 +70,13 @@ export default {
   methods: {
         iniciarSesion() {
 
+          let dataUser = {
+                userid:this.usuario.userid,
+                name:this.usuario.name,
+      
+            }
+
+
           const nickname = this.nickname;
           const PasswordUser = this.PasswordUser;
           console.log(nickname)
@@ -77,7 +84,8 @@ export default {
           
           fetch(
             `https://redb.qsystems.co/QS3100/QServlet?key=c94ad623-f583-46ed-b5e0-54f402e83ad0&passwordUser=${PasswordUser}&operation=queryLogin&tna=7&nickname=${nickname}`,
-            { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
+            { method: "POST" ,
+            body:JSON.stringify(dataUser)} // Puedes ajustar el método HTTP según sea necesario
           )
             .then((respuesta) => respuesta.json())
             .then((datosRespuesta) => {
@@ -89,8 +97,11 @@ export default {
               
               if (this.estado){
 
-              console.log("Tipo usu: ",this.datos_Respuesta.userType );
-              console.log("Id ENT: ",this.datos_Respuesta.entityID );
+                  localStorage.setItem('userid', this.datos_Respuesta.id);
+                  localStorage.setItem('name', this.datos_Respuesta.nickname);
+
+                console.log("Tipo usu: ",this.datos_Respuesta.userType );
+                console.log("Id ENT: ",this.datos_Respuesta.entityID );
               if(this.datos_Respuesta.userType==1){
            
             

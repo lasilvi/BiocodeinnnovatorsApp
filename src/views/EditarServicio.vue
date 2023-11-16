@@ -22,8 +22,6 @@
             <button type="button" v-on:click="mostrarFormularioDeEdicion(servicio)" class="btn btn-primary">Editar</button>
             <button type="button" v-on:click="borrarServicio(servicio.id)" class="btn btn-danger">Borrar</button>
             <a :href="'/EditarEstandar/' + servicio.id" style="background-color: yellow; color: black; padding: 8px 24px; text-decoration: none; border: none; border-radius: 5px;">Ver</a>
-            
-          
           </td>
         </tr>
       </tbody>

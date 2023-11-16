@@ -7,7 +7,7 @@
 
       <ul class="nav nav-pills">
         <li class="nav-item">Adminstrador</li>
-        
+        <li class="nav-item">{{dataUser['name']}}</li>
       </ul>
     </header>
   </div>
@@ -76,18 +76,28 @@
   </div>
 </template>
 <script>
+
+console.log(localStorage.getItem('name'))
 export default {
   data() {
     return {
-      Entidades:[]
+      Entidades:[],
+      dataUser:{}
     };
   },
   created:function(){
+    this.queryLocalStorage(); 
         this.submitForm();
         
 
     },
   methods: {
+    queryLocalStorage(){
+            this.dataUser['name'] = localStorage.getItem('name')
+            this.dataUser['userid'] = localStorage.getItem('userid')
+            console.log(this.dataUser['name'])
+            
+    },
     submitForm() {
     fetch(
       `https://redb.qsystems.co/QS3100/QServlet?operation=queryEntityByTenancy&tna=7&key=c94ad623-f583-46ed-b5e0-54f402e83ad0`,
