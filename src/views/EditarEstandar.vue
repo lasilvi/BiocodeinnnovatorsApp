@@ -20,7 +20,7 @@
         <th scope="col">ID</th>
         <th scope="col">Descripción</th>
         <th scope="col">Acciones</th>
-        <th scope="col">Anexos</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -36,12 +36,6 @@
 
           </div>
         </td>
-        <td>
-        <form @submit="subirArchivo($event,estandar.id)" enctype="multipart/form-data">
-                <input type="file" class="form-control" name="archivo">
-                <button type="submit" class="btn btn-secondary">Cargar archivo</button>
-            </form>
-          </td>
       </tr>
     </tbody>
   </table>

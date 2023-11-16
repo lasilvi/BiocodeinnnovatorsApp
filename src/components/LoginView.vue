@@ -60,7 +60,10 @@ export default {
       return {
           
             nickname: "",
-            PasswordUser: ""
+            PasswordUser: "",
+            usuario:{
+
+          }
           
       };
   },
@@ -81,10 +84,9 @@ export default {
               this.datos_Respuesta=datosRespuesta["userVO"];
               this.estado=datosRespuesta["valid"]
               console.log("datos_Respuesta: ", this.datos_Respuesta);
+              console.log("id: ", this.datos_Respuesta.id);
               console.log("Estado:",this.estado);
-              console.log("Comparación True",this.estado==true);
-              console.log("Contraseña:",this.password);
-
+              
               if (this.estado){
 
               console.log("Tipo usu: ",this.datos_Respuesta.userType );

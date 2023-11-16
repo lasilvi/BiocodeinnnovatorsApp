@@ -16,13 +16,20 @@
       <table class="table">
           <thead>
             <tr>
-              <th scope="col" style="width: 25%;">Estándares</th>
-              <th scope="col" style="width: 75%;">Criterios</th>
+              <th scope="col" style="width: 15%;">Estándar</th>
+              <th scope="col" style="width: 80%;">Criterios</th>
             </tr>
           </thead>
           <tbody> 
           <td>
-            {{ this.selectedestandar }}
+            
+            <div v-for="estandar in estandares" :key="estandar.id" class="col-md-4 mb-4">
+              <div><p style="font-size: 18px;  font-weight: bold;">{{ estandar.name }}</p></div>
+                  
+            </div>
+           
+                
+                    
           </td>
           <table class="table">
             <thead>
@@ -43,8 +50,11 @@
           <option value="NA">NA</option>
         </select>
       </td>
+    
       <td>
-        <button  v-on:click="guardarNuevoCriterio" class="btn btn-success">Nuevo Criterio</button>
+                  <div class="btn-group" role="group" aria-label="">
+        <button type="button" class="btn btn-success" v-on:click="guardarNuevoCriterio">Nuevo Criterio</button>
+                  </div>
       </td>
     </tr>
             <tr v-for="criterio in criterios" :key="criterio.id">
@@ -55,6 +65,15 @@
                 <option value="NC">NC</option>
                 <option value="NA">NA</option>
               </select></td>
+           <td> <div class="btn-group" role="group" aria-label="">
+            <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary">Agregar archivo</button></div></td>   
+           <td>
+            
+              <form  v-if="mostrarFormulario">
+                      <input type="text" class="form-control" v-model="criterio.archivo" name="archivo">
+                      <button type="submit" v-on:click="subirArchivo($event,criterio.id,criterio.archivo) " class="btn btn-secondary">Cargar archivo</button>
+              </form>
+           </td>
               <td>
                   <div class="btn-group" role="group" aria-label="">
                     <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger">Editar</button>
@@ -62,11 +81,13 @@
               </td>
               </tr>
           </table>
+          
       </tbody>
     </table>
   </form>
-    </div>
-    <div class="mensaje">{{ mensaje }}</div>
+  
+    </div >
+    <div class="alert alert-success fixed-bottom mx-auto" v-if="mostrarMensaje">{{ mensaje }}</div>
 
    </div>
  </template>
@@ -83,11 +104,14 @@ export default {
     nuevoCriterio: {
       description: "",
       observation: "",
-      answer: "C", // Valor por defecto
+      answer: " ", // Valor por defecto
     },
+    mostrarFormulario: false,
     mostrarFormulariocreacion: false,
     selectedestandar: null,
     selectedservicio: null,
+    criterioIdMostrado: null,
+    criterioid: null,
     mensaje: "",
     mostrarMensaje: false,
     servicios: [],
@@ -98,7 +122,8 @@ export default {
     observationCriteria: '',
     standardIdCriteria: '',
     serviceIdCriteria: '',
-    idCriteria : ''
+    idCriteria : '',
+    archivo: "",
    
    };
  },
@@ -108,8 +133,15 @@ export default {
         this.consultarCriterio(this.selectedestandar);
         this.consultarServicio(this.selectedservicio)
         this.consultarEstandar(this.selectedestandar)
+        console.log(this.estandares); 
+
     },
  methods: {
+  mostrarFormularioarchivo(criterioid) {
+    // Otras lógicas si las hay
+    this.mostrarFormulario = true;
+    this.criterioIdMostrado = criterioid; 
+  },
   volverAPaginaAnterior() {
     this.$router.go(-1); // Navegar hacia atrás en el historial
   },
@@ -239,7 +271,7 @@ export default {
         .catch(console.log)
     },
   consultarEstandar(estandarId){
-      const operation = "queryStandardById";
+      const operation = "queryStandardById"; 
         const tna = 7;
         const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
         const idStandard = estandarId;
@@ -251,11 +283,54 @@ export default {
         )
         .then(respuesta=>respuesta.json())
         .then((datosRespuesta)=>{
-          this.servicios= datosRespuesta;
-          console.log(this.servicios); 
+          this.estandares= datosRespuesta.arrayStandard;
+          console.log(this.estandares); 
         })
         .catch(console.log)
     },
+    subirArchivo(event,criterioID,archivo) {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append('urlFile', archivo);
+
+        console.log(formData.get('urlFile'));
+        formData.append('fileIdStandard', '');
+        // Puedes agregar otros datos al formulario si es necesario
+        formData.append('descriptionFile', 'nombre-del-archivo');
+        formData.append('nameFile', 'nombre-del-archivo');
+        formData.append('fileIdCriteria', criterioID);
+        //
+        formData.append('operation', 'SaveFile');
+        formData.append('tna', 7);
+        formData.append('key', 'c94ad623-f583-46ed-b5e0-54f402e83ad0');
+
+        console.log('Datos del formulario:', formData);
+        console.log(archivo);
+        console.log(criterioID);
+
+        fetch('https://redb.qsystems.co/QS3100/QServlet', {
+            method: 'POST',
+            body: formData
+        })
+        .then((respuesta) => respuesta.json())
+        .then((datosRespuesta) => {
+          console.log(datosRespuesta);
+
+          this.mensaje = "Archivo cargado correctamente";
+          this.mostrarMensaje = true;
+            this.consultarEstandares(this.servicioId)
+            this.mensaje = datosRespuesta.message;
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          
+        })
+        .catch(console.log);
+
+        this.mostrarFormulario = false;
+        this.archivo= ""
+    }
  },
 };
 
