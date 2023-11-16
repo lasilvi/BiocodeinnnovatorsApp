@@ -101,7 +101,8 @@ export default {
                   localStorage.setItem('name', this.datos_Respuesta.nickname);
 
                 console.log("Tipo usu: ",this.datos_Respuesta.userType );
-                console.log("Id ENT: ",this.datos_Respuesta.entityID );
+                
+
               if(this.datos_Respuesta.userType==1){
            
             
@@ -122,7 +123,7 @@ export default {
               
             //if (this.username === 'Entidad' && this.password === 'contraseña') {
               // Redirige al usuario a la ventana principal (por ejemplo, '/dashboard')
-              this.$router.push({name:'DashBoardAdmin'});
+              this.$router.push({name:'DashBoardUser'});
               }
             } else {
               // Maneja el caso de credenciales incorrectas o muestra un mensaje de error

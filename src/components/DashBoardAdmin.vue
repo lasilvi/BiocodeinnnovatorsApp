@@ -6,8 +6,9 @@
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item">Adminstrador</li>
-        <li class="nav-item">{{dataUser['name']}}</li>
+        <li class="nav-item">{{dataUser['name']}} -  </li>
+        
+        <li class="nav-item"> Adminstrador</li>
       </ul>
     </header>
   </div>

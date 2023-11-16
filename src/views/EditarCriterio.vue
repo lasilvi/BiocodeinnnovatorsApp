@@ -36,7 +36,8 @@
             <tr>
               <th scope="col" style="width: 50%;">Descripción</th>
               <th scope="col" style="width: 25%;">Observación</th>
-              <th scope="col" style="width: 25%;">Respuesta</th>
+              <th scope="col" style="width: 10%;">Respuesta</th>
+              <th scope="col" style="width: 15%;">Acciones</th>
             </tr>
           </thead>
 
@@ -52,9 +53,9 @@
       </td>
     
       <td>
-                  <div class="btn-group" role="group" aria-label="">
-        <button type="button" class="btn btn-success" v-on:click="guardarNuevoCriterio">Nuevo Criterio</button>
-                  </div>
+          <div class="btn-group" role="group" aria-label="">
+               <button type="button" class="btn btn-success" v-on:click="guardarNuevoCriterio">Nuevo Criterio</button>
+          </div>
       </td>
     </tr>
             <tr v-for="criterio in criterios" :key="criterio.id">
@@ -65,8 +66,7 @@
                 <option value="NC">NC</option>
                 <option value="NA">NA</option>
               </select></td>
-           <td> <div class="btn-group" role="group" aria-label="">
-            <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary">Agregar archivo</button></div></td>   
+            
            <td>
             
               <form  v-if="mostrarFormulario">
@@ -75,9 +75,11 @@
               </form>
            </td>
               <td>
-                  <div class="btn-group" role="group" aria-label="">
-                    <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger">Editar</button>
-                  </div>
+                  <div class="d-flex" role="group" aria-label="">
+                  <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary mx-1">Agregar archivo</button>
+                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-primary mx-1">Editar</button>
+                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger mx-1">Borrar</button>
+                </div>
               </td>
               </tr>
           </table>
@@ -318,8 +320,6 @@ export default {
 
           this.mensaje = "Archivo cargado correctamente";
           this.mostrarMensaje = true;
-            this.consultarEstandares(this.servicioId)
-            this.mensaje = datosRespuesta.message;
             setTimeout(() => {
               this.mostrarMensaje = false;
               this.mensaje = "";

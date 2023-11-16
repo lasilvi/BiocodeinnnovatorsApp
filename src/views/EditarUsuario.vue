@@ -200,8 +200,6 @@
       </small>
     </div>
   </form>
-
- <div class="mensaje">{{ mensaje }}</div>
    </div>
  </template>
  
@@ -306,23 +304,28 @@ export default {
        .then((respuesta) => respuesta.json())
        .then((datosRespuesta) => {
          console.log(datosRespuesta);
-         this.mensaje = datosRespuesta.message;
-         this.consultarUsuarios();
-         setTimeout(() => {
-              this.mostrarMensaje = false; // Ocultar el mensaje
-              this.mensaje = ""; // Limpiar el mensaje
-          }, 5000);
+  
+         if (datosRespuesta.userVO) {
+            this.mensaje = "Usuario editado exitosamente";
+            this.consultarUsuarios();
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          } 
         
        })
        .catch(console.log);
 
      // Limpia el formulario después de enviar los datos
-     this.nameUser = ' ';
-     this.nickname = ' ';
-     this.phoneUser = ' ';
-     this.passwordUser = ' ';
-     this.documentUser = ' ';
-     this.positionUser = ' ';
+     this.nameUser = '';
+     this.nickname = '';
+     this.phoneUser = '';
+     this.passwordUser = '';
+     this.documentUser = '';
+     this.positionUser = '';
      this.mostrarFormulario = false;
    },
    borrarUsuario(id) {
@@ -362,6 +365,7 @@ export default {
       const positionUser = this.positionUser;
       const userType = this.userType;
       const userEntityId = 89;
+      console.log(userType);
 
       // Envía los datos a la API utilizando fetch
       const operation = "SaveUser";
@@ -399,13 +403,13 @@ export default {
         .catch(console.log);
 
       // Limpia el formulario después de enviar los datos
-      this.nameUser = ' ';
-      this.nickname = ' ';
-      this.phoneUser = ' ';
-      this.passwordUser = ' ';
-      this.documentUser = ' ';
-      this.positionUser = ' ';
-      this.userType = ' ';
+      this.nameUser = '';
+      this.nickname = '';
+      this.phoneUser = '';
+      this.passwordUser = '';
+      this.documentUser = '';
+      this.positionUser = '';
+      this.userType = '';
     },
  },
 };

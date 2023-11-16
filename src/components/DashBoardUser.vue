@@ -5,7 +5,9 @@
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
         </a>
         <ul class="nav nav-pills">
+          <li class="nav-item">{{dataUser['name']}}</li>
           <li class="nav-item">Usuario</li>
+
         </ul>
       </header>
     </div>
@@ -15,15 +17,23 @@
   export default {
     data() {
       return {
-        Entidades:[]
+        Entidades:[],
+        dataUser:{}
       };
     },
     created:function(){
           this.submitForm();
+          this.queryLocalStorage(); 
           
   
       },
     methods: {
+      queryLocalStorage(){
+            this.dataUser['name'] = localStorage.getItem('name')
+            this.dataUser['userid'] = localStorage.getItem('userid')
+            console.log(this.dataUser['name'])
+            
+    },
       submitForm() {
       fetch(
         `https://redb.qsystems.co/QS3100/QServlet?operation=queryEntityByTenancy&tna=7&key=c94ad623-f583-46ed-b5e0-54f402e83ad0`,

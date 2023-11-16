@@ -23,6 +23,11 @@
             <button type="button" v-on:click="borrarServicio(servicio.id)" class="btn btn-danger">Borrar</button>
             <a :href="'/EditarEstandar/' + servicio.id" style="background-color: yellow; color: black; padding: 8px 24px; text-decoration: none; border: none; border-radius: 5px;">Ver</a>
           </td>
+          <div class="d-flex" role="group" aria-label="">
+  <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary mx-1">Agregar archivo</button>
+  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-primary mx-1">Editar</button>
+  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger mx-1">Borrar</button>
+</div>
         </tr>
       </tbody>
     </table>
@@ -102,6 +107,7 @@ export default {
  },
  data() {
    return {
+    mensaje: "",
     mostrarFormulario: false,
     mostrarFormulariocreacion: false,
     servicios: [],
@@ -236,6 +242,16 @@ export default {
         .then((datosRespuesta) => {
           console.log(datosRespuesta);
           this.consultarServicios();
+          if (datosRespuesta.arrayEntity) {
+            this.mensaje = "servicio registrado exitosamente";
+            this.consultarUsuarios();
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          } 
         })
         .catch(console.log);
 

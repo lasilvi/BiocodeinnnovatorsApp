@@ -5,6 +5,7 @@
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
       </a>
       <ul class="nav nav-pills">
+        <li class="nav-item">{{dataUser['name']}} -  </li>
         <li class="nav-item">Auditor</li>
       </ul>
     </header>
@@ -55,7 +56,7 @@
               <td><input type="text" v-model="criterio.observationCriteriaAuditor"></td>
               <td>
                 <div class="btn-group" role="group" aria-label="">
-                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger">Agregar Obsevración</button>
+                  <button type="submit" v-on:click="agregarcomentario(criterio)" class="btn btn-danger">Agregar Obsevración</button>
                 </div>
               </td>
             </tr>
@@ -72,6 +73,7 @@
         </div>
     </div>
     </div>
+    <div class="alert alert-success fixed-bottom mx-auto" v-if="mostrarMensaje">{{ mensaje }}</div>
   </template>
 
 
@@ -79,16 +81,32 @@
   export default {
     data() {
       return {
+        dataUser:{},
         servicios: [],
         estandares : [],
         criterios : {},
         mostrarEstandaresCriterios: false,
+        descriptionCriteria: '',
+        answerCriteria: '',
+        observationCriteria: '',
+        standardIdCriteria: '',
+        serviceIdCriteria: '',
+        idCriteria : '',
+        mensaje: "",
+       mostrarMensaje: false ,
       };
     },
     created:function(){
+      this.queryLocalStorage(); 
         this.consultarServicios();
     },
     methods: {
+      queryLocalStorage(){
+            this.dataUser['name'] = localStorage.getItem('name')
+            this.dataUser['userid'] = localStorage.getItem('userid')
+            console.log(this.dataUser['name'])
+            
+    },
     mostrar(servicio) {
         // Otras lógicas si las hay
         this.consultarEstandares(servicio);
@@ -173,8 +191,8 @@
       const observationCriteriaAuditor = criterio.observationCriteriaAuditor;
       const descriptionCriteria = criterio.description;
       const answerCriteria = criterio.answer;
-      const serviceIdCriteria = this.selectedservicio;
-      const standardIdCriteria = this.selectedestandar;
+      const serviceIdCriteria = criterio.serviceID;
+      const standardIdCriteria = criterio.standardID;
       const idCriteria = criterio.id;
 
 
@@ -185,11 +203,30 @@
       )
         .then((respuesta) => respuesta.json())
         .then((datosRespuesta) => {
+          if (datosRespuesta.criteriaVO) {
+            this.mensaje = "comentario registrado";
+            
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          }
+          else {
+            // Si no se encuentra la clave userVO en la respuesta, muestra un mensaje de error
+            this.mensaje = "Hubo un error al guardar el comentario.";
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          }
           console.log(datosRespuesta);
           this.consultarCriterio(this.selectedestandar);
         })
         .catch(console.log);
-
 
       },
     },
