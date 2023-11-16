@@ -24,12 +24,14 @@
       <div><img  src="../assets/img1.png" alt="Card image cap" class="img-fluid" style="max-height: 50px;"></div>
       <div><strong>BioCodeInnovators</strong></div>
      </a>
-     <router-link to="/Login"  class="btn btn-outline-primary">
-        <i class="fas fa-trash"></i> Ingresar
-      </router-link>
-     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-     </button>
+     <div class="d-flex align-items-center">
+          <router-link to="/Login" style="color: white; margin-right: 10px;">
+            <i class="btn btn-link"></i> Ingresar
+          </router-link>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
      
    </div>
  </div>
@@ -124,4 +126,3 @@
  margin-top: 10px;
 }
 </style>
-

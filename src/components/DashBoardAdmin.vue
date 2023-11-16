@@ -6,9 +6,11 @@
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item">{{dataUser['name']}} -  </li>
-        
-        <li class="nav-item"> Adminstrador</li>
+        <li class="nav-item">
+          <span style="font-weight: bold; font-size: larger;">Administrador</span>
+          <br>
+          <span style="font-size: medium;">{{dataUser['name']}}</span>
+        </li>
       </ul>
     </header>
   </div>
@@ -69,7 +71,7 @@
         </button>
         <div class="collapse" id="account-collapse">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Cerrar sesión</a></li>
+            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
           </ul>
         </div>
       </li>
@@ -124,6 +126,11 @@ export default {
         // Puedes manejar el error aquí, mostrar un mensaje de error, etc.
       });
   },
+
+  sessionClose(){
+      localStorage.clear(),
+      this.$router.push({name:'home'});
+    },
   },
 };
 </script>
@@ -156,4 +163,6 @@ export default {
   margin-top: 10px;
 }
 </style>
+
+
 
