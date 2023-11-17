@@ -119,12 +119,7 @@ export default {
                   this.$router.push({name:'DashBoardAuditor'});
                 
               }
-              else {
               
-            //if (this.username === 'Entidad' && this.password === 'contraseña') {
-              // Redirige al usuario a la ventana principal (por ejemplo, '/dashboard')
-              this.$router.push({name:'DashBoardUser'});
-              }
             } else {
               // Maneja el caso de credenciales incorrectas o muestra un mensaje de error
               alert(datosRespuesta["error"]);

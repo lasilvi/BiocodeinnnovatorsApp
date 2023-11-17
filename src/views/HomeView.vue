@@ -1,5 +1,5 @@
 <template>
-  <header data-bs-theme="dark">
+  <header data-bs-theme="dark" class="fixed-top">
    <div class="collapse text-bg-dark" id="navbarHeader">
      <div class="container">
        <div class="row">
@@ -25,7 +25,7 @@
       <div><strong>BioCodeInnovators</strong></div>
      </a>
      <div class="d-flex align-items-center">
-          <router-link to="/Login" style="color: white; margin-right: 10px;">
+          <router-link to="/Login" style="color: white; margin-right: 10px; text-decoration: none;">
             <i class="btn btn-link"></i> Ingresar
           </router-link>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 </header>   
    <router-view></router-view>
    <section class="py-5 text-center container">
-     <div class="row mb-5">
+     <div class="row mb-5" style="margin-top: 70px;">
          <div class="col-md-6 col-lg-4 mb-3">
            <div class="card h-100">
             <img class="card-img-top" src="../assets/admon.png" alt="Card image cap" style="max-height: 300px;">
