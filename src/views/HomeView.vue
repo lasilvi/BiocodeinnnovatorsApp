@@ -37,26 +37,26 @@
  </div>
 </header>   
     <router-view></router-view>
-    <div id="carouselExampleDark" class="carousel carousel slide" style="margin-top: 100px; background-color: #003e4b;" data-bs-interval="3000">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
+    <div id="carouselExampleDark" class="carousel slide" style="margin-top: 100px; background-color: #003e4b;" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" ></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
     <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="10000">
+      <div class="carousel-item active" data-bs-bs-interval="1000">
         <img src="../assets/admon.png" class="d-block" alt="banner 1" style="max-height: 300px; margin-left: 10%;" >
         <div class="carousel-caption d-none d-md-block"  style="position: absolute; top: 0; left: 100px; right: 0; text-align: center; padding: 20px;">
-          <div style="text-align: center;">
+          <div style="text-align: center;"> 
             <h5 style="font-size: 2em;">Administrador</h5>
           </div>
           <p style="text-align: justify; max-width: 600px; margin: 20px auto;">La plataforma facilita la gestión de cuentas de usuario, establecer estándares
                 de habilitación, definir los servicios que serán evaluados y proporcionar herramientas como listas
-                de chequeo para garantizar el cumplimiento de las condiciones de habilitación en la atención médica
+                de chequeo para garantizar el cumplimiento de las condiciones de habilitación en la atención médica.
           </p>
         </div>
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
+      <div class="carousel-item" data-bs-bs-interval="1000">
         <img src="../assets/usuario.png" class="d-block" alt="banner 2" style="max-height: 300px; margin-left: 8%;">
         <div class="carousel-caption d-none d-md-block"  style="position: absolute; top: 0; left: 100px; right: 0; text-align: center; padding: 20px;">
           <div style="text-align: center;">
@@ -70,7 +70,7 @@
           </p>
         </div>
       </div>
-      <div class="carousel-item">
+      <div class="carousel-item" data-bs-bs-interval="3000">
         <img src="../assets/auditor.png" class="d-block" alt="danner 3" style="max-height: 300px; margin-left: 10%;">
         <div class="carousel-caption d-none d-md-block"  style="position: absolute; top: 0; left: 100px; right: 0; text-align: center; padding: 20px;">
           <div style="text-align: center;">
