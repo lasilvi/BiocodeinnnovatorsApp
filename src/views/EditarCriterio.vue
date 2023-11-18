@@ -7,37 +7,27 @@
         </div>
 
         <div class="row">
-      <div v-for="servicio in servicios" :key="servicio.id" class="col-md-4 mb-4">
+          <tr>
+            <div v-for="servicio in servicios" :key="servicio.id" class="col-md-4 mb-4">
         <div><p style="font-size: 18px;  font-weight: bold;">{{ servicio.name }}</p></div>
+      </div>
+          </tr>
+
+      <div v-for="estandar in estandares" :key="estandar.id" class="col-md-4 mb-4">
+        <div><p style="font-size: 18px;  font-weight: bold;">{{ estandar.name }}</p></div>
             
       </div>
     </div>
       <form @submit.prevent="submitForm">
-      <table class="table">
-          <thead>
-            <tr>
-              <th scope="col" style="width: 15%;">Estándar</th>
-              <th scope="col" style="width: 80%;">Criterios</th>
-            </tr>
-          </thead>
-          <tbody> 
-          <td>
-            
-            <div v-for="estandar in estandares" :key="estandar.id" class="col-md-4 mb-4">
-              <div><p style="font-size: 18px;  font-weight: bold;">{{ estandar.name }}</p></div>
-                  
-            </div>
-           
-                
-                    
-          </td>
+     
           <table class="table">
             <thead>
             <tr>
-              <th scope="col" style="width: 50%;">Descripción</th>
-              <th scope="col" style="width: 25%;">Observación</th>
+              <th scope="col" style="width: 40%;">Descripción</th>
+              <th scope="col" style="width: 20%;">Observación</th>
               <th scope="col" style="width: 10%;">Respuesta</th>
-              <th scope="col" style="width: 15%;">Acciones</th>
+              <th scope="col" style="width: 20%;">Observación auditor</th>
+              <th scope="col" style="width: 10%;">Acciones</th>
             </tr>
           </thead>
 
@@ -66,26 +56,27 @@
                 <option value="NC">NC</option>
                 <option value="NA">NA</option>
               </select></td>
+              <td><input type="text" v-model="criterio.observationAuditor"></td>
             
-           <td>
-            
-              <form  v-if="mostrarFormulario">
-                      <input type="text" class="form-control" v-model="criterio.archivo" name="archivo">
-                      <button type="submit" v-on:click="subirArchivo($event,criterio.id,criterio.archivo) " class="btn btn-secondary">Cargar archivo</button>
-              </form>
-           </td>
+           
               <td>
                   <div class="d-flex" role="group" aria-label="">
-                  <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary mx-1">Agregar archivo</button>
-                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-primary mx-1">Editar</button>
-                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger mx-1">Borrar</button>
+                  <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary btn-sm">Agregar archivo</button>
+                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-primary btn-sm">Editar</button>
+                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger btn-sm">Borrar</button>
                 </div>
               </td>
+              <td>
+            
+            <form  v-if="mostrarFormulario">
+                    <input type="text" class="form-control" v-model="criterio.archivo" name="archivo">
+                    <button type="submit" v-on:click="subirArchivo(criterio.id,criterio.archivo) " class="btn btn-secondary">Cargar archivo</button>
+            </form>
+
+         </td>
               </tr>
           </table>
           
-      </tbody>
-    </table>
   </form>
   
     </div >
@@ -290,30 +281,22 @@ export default {
         })
         .catch(console.log)
     },
-    subirArchivo(event,criterioID,archivo) {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('urlFile', archivo);
-
-        console.log(formData.get('urlFile'));
-        formData.append('fileIdStandard', '');
-        // Puedes agregar otros datos al formulario si es necesario
-        formData.append('descriptionFile', 'nombre-del-archivo');
-        formData.append('nameFile', 'nombre-del-archivo');
-        formData.append('fileIdCriteria', criterioID);
-        //
-        formData.append('operation', 'SaveFile');
-        formData.append('tna', 7);
-        formData.append('key', 'c94ad623-f583-46ed-b5e0-54f402e83ad0');
-
-        console.log('Datos del formulario:', formData);
-        console.log(archivo);
-        console.log(criterioID);
-
-        fetch('https://redb.qsystems.co/QS3100/QServlet', {
-            method: 'POST',
-            body: formData
-        })
+    subirArchivo(criterioID,archivo) {
+  
+        const operation = "SaveFile";
+        const tna = 7;
+        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
+        const nameFile = 'nombre-del-archivo';
+        const urlFile = archivo;
+        const descriptionFile = "descripcion"
+        const fileIdCriteria =  criterioID
+        
+        
+        fetch(
+          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&nameFile=${nameFile}&key=${key}&urlFile=${urlFile}&descriptionFile=${descriptionFile}&fileIdCriteria=${fileIdCriteria}`,
+          
+          { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
+        )
         .then((respuesta) => respuesta.json())
         .then((datosRespuesta) => {
           console.log(datosRespuesta);
@@ -326,7 +309,9 @@ export default {
             }, 5000);
           
         })
-        .catch(console.log);
+        .catch((error) => {
+        console.error('Error al procesar la respuesta:', error);
+      });
 
         this.mostrarFormulario = false;
         this.archivo= ""

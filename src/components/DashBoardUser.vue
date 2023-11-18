@@ -5,14 +5,18 @@
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
         </a>
         <ul class="nav nav-pills">
-          <li class="nav-item">{{dataUser['name']}}</li>
-          <li class="nav-item">Usuario</li>
-
-        </ul>
+        <li class="nav-item">
+          <span style="font-weight: bold; font-size: larger;">Usuario</span>
+          <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
+          <br>
+          <span style="font-size: medium;">{{dataUser['name']}}</span>
+        </li>
+      </ul>
       </header>
     </div>
 
   </template>
+
   <script>
   export default {
     data() {
@@ -24,7 +28,7 @@
     created:function(){
           this.submitForm();
           this.queryLocalStorage(); 
-          
+          this.checkSessionAndFetchData();
   
       },
     methods: {
@@ -34,6 +38,16 @@
             console.log(this.dataUser['name'])
             
     },
+    checkSessionAndFetchData() {
+    this.queryLocalStorage();
+
+    // Verifica si hay datos de sesión
+    if (!this.dataUser.name || !this.dataUser.userid) {
+      // Si no hay datos de sesión, muestra un mensaje y redirige a la página de inicio de sesión
+      alert('Por favor, inicia sesión.');
+      this.$router.push({name:'Login'});
+      return; // Detiene la ejecución del método
+    }},
       submitForm() {
       fetch(
         `https://redb.qsystems.co/QS3100/QServlet?operation=queryEntityByTenancy&tna=7&key=c94ad623-f583-46ed-b5e0-54f402e83ad0`,

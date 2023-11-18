@@ -90,7 +90,8 @@ export default {
   },
   created:function(){
     this.queryLocalStorage(); 
-        this.submitForm();
+    this.checkSessionAndFetchData();
+    this.submitForm();
         
 
     },
@@ -101,6 +102,16 @@ export default {
             console.log(this.dataUser['name'])
             
     },
+    checkSessionAndFetchData() {
+    this.queryLocalStorage();
+
+    // Verifica si hay datos de sesión
+    if (!this.dataUser.name || !this.dataUser.userid) {
+      // Si no hay datos de sesión, muestra un mensaje y redirige a la página de inicio de sesión
+      alert('Por favor, inicia sesión.');
+      this.$router.push({name:'Login'});
+      return; // Detiene la ejecución del método
+    }},
     submitForm() {
     fetch(
       `https://redb.qsystems.co/QS3100/QServlet?operation=queryEntityByTenancy&tna=7&key=c94ad623-f583-46ed-b5e0-54f402e83ad0`,

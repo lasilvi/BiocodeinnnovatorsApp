@@ -5,14 +5,18 @@
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
       </a>
       <ul class="nav nav-pills">
-        <li class="nav-item">{{dataUser['name']}} -  </li>
-        <li class="nav-item">Auditor</li>
+        <li class="nav-item">
+          <span style="font-weight: bold; font-size: larger;">Usuario Auditor</span>
+          <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
+          <br>
+          <span style="font-size: medium;">{{dataUser['name']}}</span>
+        </li>
       </ul>
     </header>
 
     <div class="p-5 mb-4 bg-body-tertiary rounded-3">
       <div class="container-fluid py-5">
-
+        <div style="display: flex;">
         <table class="table table-no-background">
           <thead>
             <tr>
@@ -26,56 +30,95 @@
               <td >{{ servicio.name }}</td>
               <td>{{ servicio.description }}</td>
               <td>
-                <button type="button" v-on:click="mostrar(servicio.id)" class="btn btn-success">Ver</button>
+                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn-success">Ver estandares</button>
               </td>
             </tr>
           </tbody>
         </table>
+        <td>
+          <tr v-for="estandar in estandares" :key="estandar.id">
+            <td >{{ estandar.name }}</td> 
+            <td>  <button type="button" v-on:click="mostrar(estandar.id)" class="btn btn-primary"> criterios </button></td>
+          </tr>
+        </td>
+      </div>
 
         <form @submit.prevent="submitForm" v-if="mostrarEstandaresCriterios">
+          <div v-if="mostrarEstandaresCriterios">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" style="width: 20%;">Nombre del estandar</th>
-                  <th scope="col" style="width: 30%;">Descripción</th>
+                  <th scope="col" style="width: 20%;">Descripción</th>
                   <th scope="col" style="width: 20%;">Observación</th>
                   <th scope="col" style="width: 5%;">Respuesta</th>
-                  <th scope="col" style="width: 20%;">Observación auditores</th>
+                  <th scope="col" style="width: 30%;">Observación auditores</th>
                   <th scope="col" style="width: 5%;">Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <template v-for="(criteriosEstandar, estandarId) in criterios" :key="estandarId">
-              <tr v-for="criterio in criteriosEstandar" :key="criterio.id">
-              <td>{{ criterio.standardName}}</td>
-              <td>{{criterio.description}}</td>
-              <td>{{ criterio.observation }}</td>
-              <td>
-                {{ criterio.answer }}
-              </td>
-              <td><input type="text" v-model="criterio.observationCriteriaAuditor"></td>
-              <td>
-                <div class="btn-group" role="group" aria-label="">
-                  <button type="submit" v-on:click="agregarcomentario(criterio)" class="btn btn-danger">Agregar Obsevración</button>
-                </div>
-              </td>
-            </tr>
-          </template>
-                  
-                  
-               
+                <tr v-for="criterio in criterios" :key="criterio.id">
+                  <td>{{ criterio.description }}</td>
+                  <td>{{ criterio.observation }}</td>
+                  <td>{{ criterio.answer }}</td>
+                  <td><input type="text" v-model="criterio.observationCriteriaAuditor" placeholder="Escriba aqui su observación" style="width: 300px; height: 100px;"></td>
+                  <td>
+                    <div class="btn-group" role="group" aria-label="">
+                      <button type="submit" v-on:click="agregarcomentario(criterio.id)" class="btn btn-secondary btn-sm">Agregar Observación</button>
+                      <button type="submit" v-on:click="consultarArchivos(criterio.id)" class="btn btn-primary btn-sm">Ver anexos</button>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
+          </div>
    
 
-          </form>
+        </form>
           
         </div>
     </div>
+    
+    <div>
+    <button @click="mostrarCuadroFlotante">Mostrar Información</button>
+    <div v-if="mostrarurl">
+      <!-- Contenido del cuadro flotante -->
+      <div class="cuadro-flotante">
+        <p>Los enlaces de los archivos</p>
+        <tr v-for="link in archivos" :key="link.id">
+            <td>{{ link.link }}</td>
+        </tr>
+        <button @click="ocultarCuadroFlotante">Cerrar</button>
+      </div>
+      <!-- Fondo oscuro para el cuadro flotante -->
+      <div class="fondo-cuadro-flotante" @click="ocultarCuadroFlotante"></div>
     </div>
+    </div>
+
+  </div>
     <div class="alert alert-success fixed-bottom mx-auto" v-if="mostrarMensaje">{{ mensaje }}</div>
   </template>
+<style scoped>
+.cuadro-flotante {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
 
+.fondo-cuadro-flotante {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+</style>
 
   <script>
   export default {
@@ -83,6 +126,7 @@
       return {
         dataUser:{},
         servicios: [],
+        archivos: [],
         estandares : [],
         criterios : {},
         mostrarEstandaresCriterios: false,
@@ -94,25 +138,49 @@
         idCriteria : '',
         mensaje: "",
        mostrarMensaje: false ,
+       mostrarurl: false,
+       
       };
     },
     created:function(){
       this.queryLocalStorage(); 
         this.consultarServicios();
+        this.checkSessionAndFetchData();
     },
+
     methods: {
+      mostrarCuadroFlotante() {
+      this.mostrarurl = true;
+    },
+    ocultarCuadroFlotante() {
+      this.mostrarurl = false;
+    },
+      sessionClose(){
+      localStorage.clear(),
+      this.$router.push({name:'home'});
+    },
       queryLocalStorage(){
             this.dataUser['name'] = localStorage.getItem('name')
             this.dataUser['userid'] = localStorage.getItem('userid')
             console.log(this.dataUser['name'])
             
     },
-    mostrar(servicio) {
+    checkSessionAndFetchData() {
+    this.queryLocalStorage();
+
+    // Verifica si hay datos de sesión
+    if (!this.dataUser.name || !this.dataUser.userid) {
+      // Si no hay datos de sesión, muestra un mensaje y redirige a la página de inicio de sesión
+      alert('Por favor, inicia sesión.');
+      this.$router.push({name:'Login'});
+      return; // Detiene la ejecución del método
+    }},
+    mostrar(estandar) {
         // Otras lógicas si las hay
-        this.consultarEstandares(servicio);
+        this.consultarCriterio(estandar);
         this.mostrarEstandaresCriterios = true;
     },
-      consultarServicios(){
+    consultarServicios(){
             // Envía los datos a la API utilizando fetch
         const operation = "queryServiceByEntity";
         const tna = 7;
@@ -133,6 +201,7 @@
     },
     consultarEstandares(serviceId){
             // Envía los datos a la API utilizando fetch
+        this.mostrarEstandaresCriterios = false;
         const operation = "queryStandardByService";
         const tna = 7;
         const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
@@ -148,16 +217,31 @@
           const estandares = datosRespuesta.arrayStandard;
           console.log(estandares); 
           this.estandares = datosRespuesta.arrayStandard;
-
-          // Inicializa la variable de criterios
-        this.criterios = [];
-
-          // Itera sobre los estándares y consulta los criterios asociados
-          estandares.forEach((estandar) => {
-            this.consultarCriterio(estandar.id);
-          });
-          })
+        })
         .catch(console.log)
+    },
+    consultarArchivos(criterioId){
+            // Envía los datos a la API utilizando fetch
+        const operation = "queryFileByCriteria";
+        const tna = 7;
+        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
+        const fileIdCriteria = criterioId;
+        
+        fetch(
+          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&fileIdCriteria=${fileIdCriteria}&key=${key}`,
+          
+          { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
+        )
+        .then(respuesta=>respuesta.json())
+        .then((datosRespuesta)=>{
+          const archivos = datosRespuesta.arrayFiles;
+          console.log(archivos); 
+          this.archivos = datosRespuesta.arrayFiles;
+          this.mostrarurl = true;
+        })
+        .catch((error) => {
+        console.error('Error al procesar la respuesta:', error);
+      });
     },
     consultarCriterio(estandaId){
             // Envía los datos a la API utilizando fetch
@@ -174,9 +258,8 @@
         .then(respuesta=>respuesta.json())
         .then((datosRespuesta)=>{
           const criterios = datosRespuesta.arrayCriteria;
-          
-          this.criterios[estandaId] = criterios;
           console.log(criterios); 
+          this.criterios = datosRespuesta.arrayCriteria;
         })
         .catch(console.log)
     },
@@ -195,6 +278,14 @@
       const standardIdCriteria = criterio.standardID;
       const idCriteria = criterio.id;
 
+      console.log(observationCriteria);
+      console.log(observationCriteriaAuditor);
+      console.log(descriptionCriteria);
+      console.log(idCriteria);
+      console.log(standardIdCriteria);
+      console.log(answerCriteria);
+      console.log(idCriteria);
+      
 
       fetch(
       
