@@ -150,9 +150,34 @@
          </div>
        </div>
    </section>
-
+   <div style=" text-align: center;">
+    <footer data-bs-theme="g-dark shadow-sm text-center text-white fixed-bottom">
+      <div class="text-center p-3" style="color:white; background-color: #212529; text-decoration: none;">
+        <a>Hecho con <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+        </svg> Por BioCodeInnovators</a>
+      </div>
+    </footer>
+  </div>
 </template>
+<script>
+export default {
+  mounted() {
+    const navbarHeader = document.getElementById('navbarHeader');
+    const carouselContainer = document.getElementById('carouselExampleDark');
+    
+    navbarHeader.addEventListener('show.bs.collapse', function () {
+      // Ajustar el margen superior del carrusel cuando se muestra el menú
+      carouselContainer.style.marginTop = '300px'; // Ajusta según sea necesario
+    });
 
+    navbarHeader.addEventListener('hide.bs.collapse', function () {
+      // Restaurar el margen superior del carrusel cuando se oculta el menú
+      carouselContainer.style.marginTop = '100px'; // Ajusta según sea necesario
+    });
+  }
+}
+</script>
 <style scoped>
 .sidebar {
  width: 300px;
@@ -167,7 +192,6 @@
  height: 100%; /* Haz que el sidebar ocupe toda la altura de la pantalla */
  /* Resto de los estilos... */
 }
-
 
 .sidebar-header {
  margin-bottom: 20px;
@@ -201,5 +225,19 @@
   transform: translate(-50%, -50%);
   width: 50%;
   height: 50%;
+}
+.footer {
+  background-color: #003e4b; /* Cambia el color del footer según tus necesidades */
+  text-decoration: none; /* Quita la subrayado del enlace */
+  width: 100%;
+}
+
+.footer a {
+  color: white; /* Cambia el color del texto del enlace a blanco */
+}
+
+#carouselExampleDark {
+  margin-top: 100px; /* ajusta según sea necesario */
+  transition: margin-top 0.5s ease; /* agrega transición para suavizar el cambio */
 }
 </style>
