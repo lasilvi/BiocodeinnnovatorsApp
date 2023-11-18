@@ -7,7 +7,9 @@
       <ul class="nav nav-pills">
         <li class="nav-item">
           <span style="font-weight: bold; font-size: larger;">Usuario Auditor</span>
-          <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
+          <ul>
+            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
+          </ul>
           <br>
           <span style="font-size: medium;">{{dataUser['name']}}</span>
         </li>

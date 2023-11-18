@@ -5,13 +5,14 @@
           <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
         </a>
         <ul class="nav nav-pills">
-        <li class="nav-item">
-          <span style="font-weight: bold; font-size: larger;">Usuario</span>
-          <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
-          <br>
-          <span style="font-size: medium;">{{dataUser['name']}}</span>
-        </li>
-      </ul>
+          <li class="nav-item">
+            <span style="font-weight: bold; font-size: larger;">Usuario</span>
+            <!-- Close the first li before opening the nested one -->
+            </li>
+            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
+            <br>
+            <span style="font-size: medium;">{{dataUser['name']}}</span>
+        </ul>
       </header>
     </div>
 
@@ -73,6 +74,10 @@
           // Puedes manejar el error aquí, mostrar un mensaje de error, etc.
         });
     },
+    sessionClose(){
+      localStorage.clear(),
+      this.$router.push({name:'home'});
+    }
     },
   };
   </script>

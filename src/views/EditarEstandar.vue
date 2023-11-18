@@ -1,5 +1,5 @@
 <template>
-    <DashBoardAdmin />
+ <DashBoardAdmin />
    <div class="main-content" style="margin-left: 300px;"> 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
     <div class="d-flex justify-content-between">
@@ -39,75 +39,75 @@
       </tr>
     </tbody>
   </table>
-</div>
+   </div>
 
 
-   <form @submit.prevent="submitForm" v-if="mostrarFormulario">
-   <div class="my-3 p-3 bg-body rounded shadow-sm">
-   <h6 class="border-bottom pb-2 mb-0">Editar Servicio</h6>
-   <div class="d-flex text-body-secondary pt-3">
-     <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-     <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-       <div class="d-flex justify-content-between">
-         <strong class="text-gray-dark">Nombre</strong>
-       </div>
-       <div class="form-group">
-         <input type="text" placeholder="Nombre" class="form-control" id="nameStandard" v-model="nameStandard" required>
-       </div>
-     </div>
-   </div>
-   <div class="d-flex text-body-secondary pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-        <div class="d-flex justify-content-between">
-          <strong class="text-gray-dark">Descripción</strong>
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Descripción" class="form-control" id="descriptionStandard" v-model="descriptionStandard" required>
+      <form @submit.prevent="submitForm" v-if="mostrarFormulario">
+      <div class="my-3 p-3 bg-body rounded shadow-sm">
+      <h6 class="border-bottom pb-2 mb-0">Editar Servicio</h6>
+      <div class="d-flex text-body-secondary pt-3">
+        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+          <div class="d-flex justify-content-between">
+            <strong class="text-gray-dark">Nombre</strong>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Nombre" class="form-control" id="nameStandard" v-model="nameStandard" required>
+          </div>
         </div>
       </div>
-    </div>
-   <input type="text" class="form-control" id="idStandard" v-model="idStandard" required hidden>
-   <input type="text" class="form-control" id="serviceIdStandard" v-model="serviceIdStandard" required hidden>
-     <small class="d-block text-end mt-3">
-       <button type="submit" class="btn btn-primary">Guardar</button>
-     </small>
-   </div>
- </form>
+      <div class="d-flex text-body-secondary pt-3">
+          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+          <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong class="text-gray-dark">Descripción</strong>
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Descripción" class="form-control" id="descriptionStandard" v-model="descriptionStandard" required>
+            </div>
+          </div>
+        </div>
+      <input type="text" class="form-control" id="idStandard" v-model="idStandard" required hidden>
+      <input type="text" class="form-control" id="serviceIdStandard" v-model="serviceIdStandard" required hidden>
+        <small class="d-block text-end mt-3">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </small>
+      </div>
+    </form>
 
- <form @submit.prevent="submitFormestandar" v-if="mostrarFormulariocreacion">
-    <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">Crear Estándar</h6>
-    <div class="d-flex text-body-secondary pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-        <div class="d-flex justify-content-between">
-          <strong class="text-gray-dark">Nombre de estándar</strong>
+    <form @submit.prevent="submitFormestandar" v-if="mostrarFormulariocreacion">
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Crear Estándar</h6>
+        <div class="d-flex text-body-secondary pt-3">
+          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+          <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong class="text-gray-dark">Nombre de estándar</strong>
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Nombre del estándar" class="form-control" id="nameStandard" v-model="nameStandard" required>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <input type="text" placeholder="Nombre del estándar" class="form-control" id="nameStandard" v-model="nameStandard" required>
+        <div class="d-flex text-body-secondary pt-3">
+          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+          <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong class="text-gray-dark">Descripción</strong>
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Descripción" class="form-control" id="descriptionStandard" v-model="descriptionStandard" required>
+            </div>
+          </div>
         </div>
+      
+          <small class="d-block text-end mt-3">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </small>
+        </div>
+      </form>
+      <div class="mensaje">{{ mensaje }}</div>
       </div>
-    </div>
-    <div class="d-flex text-body-secondary pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-        <div class="d-flex justify-content-between">
-          <strong class="text-gray-dark">Descripción</strong>
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Descripción" class="form-control" id="descriptionStandard" v-model="descriptionStandard" required>
-        </div>
-      </div>
-    </div>
-  
-      <small class="d-block text-end mt-3">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-      </small>
-    </div>
-  </form>
-  <div class="mensaje">{{ mensaje }}</div>
-   </div>
  </template>
  
 <script>
