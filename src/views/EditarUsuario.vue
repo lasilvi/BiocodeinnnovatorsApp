@@ -1,8 +1,8 @@
 <template>
     <DashBoardAdmin />
-   <div class="main-content" style="margin-left: 300px;"> 
-    <div class="my-3 p-3 bg-body rounded shadow-sm"><button type="button" v-on:click="mostrarFormularioDecreacion" class="btn btn-success">Crear Usuario</button></div>
-    
+   <div class="main-content" style="margin-left: 300px;">
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+      <button type="button" v-on:click="mostrarFormularioDecreacion" class="btn btn-success">Crear Usuario</button></div>
     <div class="my-3 p-3 bg-body rounded shadow-sm">
     <table class="table">
       <thead>
