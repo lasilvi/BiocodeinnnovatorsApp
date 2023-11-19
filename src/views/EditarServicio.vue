@@ -1,7 +1,7 @@
 <template>
     <DashBoardAdmin />
    <div class="main-content" style="margin-left: 300px;"> 
-    <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <div class="my-3 p-3 bg-body rounded shadow-sm" style="height: 80px;">
       <button type="button" v-on:click="mostrarFormularioDecreacion" class="btn btn-success">Nuevo servicio</button>
     </div>
     
