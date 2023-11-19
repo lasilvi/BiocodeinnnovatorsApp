@@ -1,6 +1,8 @@
 <template>
-  <section class="h-100 gradient-form" style="background-color: #eee;">
-    <div class="container py-5 h-100">
+  <section class="h-200 gradient-form" style="background-color: #eeeeee;">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <div class="container py-5 h-100" data-aos="flip-down" >
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-10">
           <div class="card rounded-3 text-black">
@@ -25,24 +27,19 @@
                     </div>
 
                     <div class="text-center pt-1 mb-5 pb-1">
-                        <button type="submit" class="btn btn-success">Ingresar</button>
+                        <button type="submit" class="btn btn-success" style="background-color: #20c2b4;">Ingresar</button>
+                        &nbsp;
+                          <button type="submit" class="btn btn-success" style="background-color: #003e4b;" v-on:click="sessionClose()" >Cancelar</button>
                     </div>
                 </form>
 
 
                 </div>
               </div>
-              <div class="col-lg-6 d-flex align-items-center bg-blue">
-                <div class="text-white px-3 py-4 p-md-5 mx-md-4" style="text-align: justify;">
-                  <img  src="../assets/img1.png" alt="Card image cap" class="rounded mx-auto d-block" style="max-height: 180px;">
-                  <p class="small mb-0">En BioCodeInnovators, nuestro objetivo fundamental es proporcionar a 
-                    todos nuestros usuarios una experiencia de acreditación óptima y sin complicaciones. 
-                    Nos esforzamos por hacer que el proceso de verificación sea eficiente y transparente, 
-                    beneficiando tanto a nuestros usuarios como a los auditores de acuerdo con la Resolución 3100 del 2019. 
-                    Nuestra promesa incluye la garantía de mantenernos actualizados con cualquier cambio en la Resolución, 
-                    asegurando que nuestros servicios se mantengan alineados con los últimos requisitos, brindando así la 
-                    tranquilidad de que nuestros usuarios pueden confiar en nuestro compromiso constante con la excelencia 
-                    y la eficacia en todo momento.</p>
+              <div class="col-lg-6 d-flex align-items-center" style="background-color: #003e4b; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;">
+                <div class="text-white px-3 py-5 p-md-5 mx-md-4" style="text-align: justify;">
+                  <img  src="../assets/img1.png" alt="Card image cap" class="rounded mx-auto d-block" style="max-height: 200px;">
+                  <p class="small mb-0" style="margin-top: 5%;">En BioCodeInnovators, el objetivo principal es ofrecer a los usuarios una experiencia de acreditación eficiente y sin complicaciones, siguiendo la Resolución 3100 del 2019.</p>
                 </div>
               </div>
             </div>
@@ -55,6 +52,8 @@
 
 
 <script>
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 export default {
   data() {
       return {
@@ -131,9 +130,15 @@ export default {
 
 
           },
-    }
-
+    sessionClose(){
+      localStorage.clear(),
+      this.$router.push({name:'home'});
+    },
+    },
+    mounted() {
+      AOS.init();
   }
+}
 </script>
 <style>
   .bg-blue {
@@ -149,6 +154,8 @@ export default {
   @media (min-width: 768px) {
   .gradient-form {
   height: 100vh !important;
+  margin:0;
+  padding: 0%;
   }
   }
 </style>
