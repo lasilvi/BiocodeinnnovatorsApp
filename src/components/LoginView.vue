@@ -105,7 +105,7 @@ export default {
               if(this.datos_Respuesta.userType==1){
            
             
-                this.$router.push({name:'DashBoardAdmin'});
+                this.$router.push({name:'DashBoardAdmin2'});
              
               }
               if(this.datos_Respuesta.userType==2){

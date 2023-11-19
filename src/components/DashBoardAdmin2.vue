@@ -82,6 +82,22 @@
     </div>
     <div class="background-container" style="text-align: justify;">
     <div class="dashboard-content" style="text-align:center; margin-right: 10%; margin-top: 1%; margin-left: 2%;">
+        <h1>Bienvenido al Dashboard del Administrador</h1>
+
+        <p style="text-align: justify; padding-left: 10%; margin-right: 10%;">
+            Como administrador del sistema, se pueden realizar las siguientes acciones:
+        </p>
+
+        <ol class="list-group-numbered" style="text-align: justify; padding-left: 10%; margin-right: 10%;">
+            <li class="list-group-item">Crear y gestionar cuentas de usuario para las organizaciones de salud, permitiéndoles acceder a la herramienta y visualizar el estado de sus autoevaluaciones.</li>
+            <li class="list-group-item">Definir y mantener una lista de estándares de habilitación específicos para Colombia, brindando a las organizaciones la capacidad de evaluar su cumplimiento.</li>
+            <li class="list-group-item">Definir y mantener una lista de servicios en los cuales se llevará a cabo la autoevaluación de condiciones de habilitación.</li>
+            <li class="list-group-item">Crear y gestionar listas de chequeo que asocien el cumplimiento de condiciones de habilitación de cada servicio en el que se realizará la autoevaluación de condiciones de habilitación.</li>
+        </ol>
+
+        <p style="text-align: justify; padding-left: 10%; margin-right: 10%;">
+            Los administradores también contarán con la capacidad de realizar estas acciones para garantizar un adecuado funcionamiento del sistema.
+        </p>
     </div>
 </div>
 

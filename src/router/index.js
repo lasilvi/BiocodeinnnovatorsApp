@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashBoardAdmin from '../components/DashBoardAdmin.vue'
+import DashBoardAdmin2 from '../components/DashBoardAdmin2.vue'
 import DashBoardUser from '../components/DashBoardUser.vue'
 import DashBoardAuditor from '../components/DashBoardAuditor.vue'
 //import LoginView from '../components/LoginView.vue'
@@ -33,6 +34,11 @@ const routes = [
     path: '/DashBoardAdmin',
     name: 'DashBoardAdmin',
     component: DashBoardAdmin
+  },
+  {
+    path: '/DashBoardAdmin2',
+    name: 'DashBoardAdmin2',
+    component: DashBoardAdmin2
   },
   {
     path: '/DashBoardUser',
