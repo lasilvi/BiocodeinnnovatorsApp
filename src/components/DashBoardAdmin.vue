@@ -183,7 +183,6 @@ export default {
   margin-top: 10px;
 }
 .background-container {
-    background-image: url('@/assets/adminFondo2.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
