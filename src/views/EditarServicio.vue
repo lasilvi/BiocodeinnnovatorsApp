@@ -68,7 +68,9 @@
     </div>
    <input type="text" class="form-control" id="idService" v-model="idService" required hidden>
      <small class="d-block text-end mt-3">
-       <button type="submit" class="btn btn-primary">Guardar</button>
+       <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
+        &nbsp;
+        <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
      </small>
    </div>
  </form>

@@ -4,10 +4,10 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
     <div class="d-flex justify-content-between">
         <button type="button" v-on:click="mostrarFormularioDeCreacion()" class="btn btn-success">Nuevo</button>
-          <button type="button" class="btn btn-primary" v-on:click="volverAPaginaAnterior()">Volver</button>
+          <button type="button" class="btn btn" v-on:click="volverAPaginaAnterior()" style="background-color: #6c757d; color: white;">Volver</button>
     </div>
     <div class="row">
-      <div v-for="servicio in servicios" :key="servicio.id" class="col-md-4 mb-4">
+      <div v-for="servicio in servicios" :key="servicio.id" class="col-md-4 mb-4">  
         <div><p style="font-size: 18px;  font-weight: bold;">{{ servicio.name }}</p></div>
             
       </div>
@@ -30,9 +30,13 @@
         <td>{{ estandar.description }}</td>
         <td>
           <div class="btn-group" role="group" aria-label="">
-            <button type="button" v-on:click="mostrarFormularioDeEdicion(estandar)" class="btn btn-primary">Editar</button>
-            <button type="button" v-on:click="borrarEstandar(estandar.id)" class="btn btn-danger">Borrar</button>
-            <a :href="'/EditarCriterio/' + estandar.id + '/' + servicioId" style="background-color: yellow; color: black; padding: 10px 20px; text-decoration: none; border: none; border-radius: 5px;">Ver</a>
+            <button type="button" v-on:click="mostrarFormularioDeEdicion(estandar)" class="btn btn" style="background-color: #117981; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;">Editar</button>
+            &nbsp;
+            <button type="button" v-on:click="borrarEstandar(estandar.id)" class="btn btn" style="background-color: #811111; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem; border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Borrar</button>
+            &nbsp;
+            <a :href="'/EditarCriterio/' + estandar.id + '/' + servicioId" style="background-color: #CBDC3A; color: black; padding: 10px 20px; text-decoration: none; border: none; border-radius: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg></a>
 
           </div>
         </td>
@@ -44,20 +48,29 @@
 
       <form @submit.prevent="submitForm" v-if="mostrarFormulario">
       <div class="my-3 p-3 bg-body rounded shadow-sm">
-      <h6 class="border-bottom pb-2 mb-0">Editar Servicio</h6>
+      <h6 class="border-bottom pb-2 mb-0">Editar estándar</h6>
       <div class="d-flex text-body-secondary pt-3">
-        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-          <div class="d-flex justify-content-between">
-            <strong class="text-gray-dark">Nombre</strong>
+          <div class="contenedor-icono" style="margin-right: 1%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+              <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            </div>
+          <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong class="text-gray-dark">Nombre estándar</strong>
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="Nombre" class="form-control" id="nameStandard" v-model="nameStandard" required>
+            </div>
           </div>
-          <div class="form-group">
-            <input type="text" placeholder="Nombre" class="form-control" id="nameStandard" v-model="nameStandard" required>
-          </div>
-        </div>
       </div>
       <div class="d-flex text-body-secondary pt-3">
-          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+        <div class="contenedor-icono" style="margin-right: 1%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+              <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+              <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          </div>
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
             <div class="d-flex justify-content-between">
               <strong class="text-gray-dark">Descripción</strong>
@@ -70,7 +83,9 @@
       <input type="text" class="form-control" id="idStandard" v-model="idStandard" required hidden>
       <input type="text" class="form-control" id="serviceIdStandard" v-model="serviceIdStandard" required hidden>
         <small class="d-block text-end mt-3">
-          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
+          &nbsp;
+          <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
         </small>
       </div>
     </form>
@@ -79,7 +94,12 @@
         <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h6 class="border-bottom pb-2 mb-0">Crear Estándar</h6>
         <div class="d-flex text-body-secondary pt-3">
-          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+          <div class="contenedor-icono" style="margin-right: 1%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+              <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+              <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+            </svg>
+          </div>
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
             <div class="d-flex justify-content-between">
               <strong class="text-gray-dark">Nombre de estándar</strong>
@@ -90,7 +110,12 @@
           </div>
         </div>
         <div class="d-flex text-body-secondary pt-3">
-          <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+          <div class="contenedor-icono" style="margin-right: 1%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+              <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+              <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          </div>
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
             <div class="d-flex justify-content-between">
               <strong class="text-gray-dark">Descripción</strong>
@@ -102,7 +127,9 @@
         </div>
       
           <small class="d-block text-end mt-3">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="submit" class="btn btnbtn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
+            &nbsp;
+            <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
           </small>
         </div>
       </form>
@@ -331,3 +358,15 @@ export default {
 };
 
 </script>
+<style>
+.contenedor-icono svg {
+  width: 30px;
+  height: 30px;
+  color:white;
+  background-color: #117981;
+  border-top-right-radius: .3rem;
+  border-top-left-radius: .3rem;
+  border-bottom-right-radius: .3rem;
+  border-bottom-left-radius: .3rem;
+}
+</style>
