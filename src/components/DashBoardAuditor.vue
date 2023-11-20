@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="background-color: white !important; ">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -7,16 +7,15 @@
       <ul class="nav nav-pills">
         <li class="nav-item">
           <span style="font-weight: bold; font-size: larger;">Usuario Auditor</span>
-          <ul>
-            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a></li>
-          </ul>
           <br>
-          <span style="font-size: medium;">{{dataUser['name']}}</span>
+          <span style="font-size: medium;"><strong>{{dataUser['name']}}</strong></span>
+          <br>
+          <a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded" v-on:click="sessionClose()">Cerrar sesión</a>
         </li>
       </ul>
     </header>
 
-    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+    <div class="p-5 mb-4 rounded-3">
       <div class="container-fluid py-5">
         <div style="display: flex;">
         <table class="table table-no-background">
@@ -32,7 +31,8 @@
               <td >{{ servicio.name }}</td>
               <td>{{ servicio.description }}</td>
               <td>
-                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn-success">Ver estandares</button>
+                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: 
+#003e4b; color: #F0F0F0;">Ver estandares</button>
               </td>
             </tr>
           </tbody>
@@ -40,7 +40,11 @@
         <td>
           <tr v-for="estandar in estandares" :key="estandar.id">
             <td >{{ estandar.name }}</td> 
-            <td>  <button type="button" v-on:click="mostrar(estandar.id)" class="btn btn-primary"> criterios </button></td>
+            <td>  
+              <div class="btn-group" role="group" aria-label="">
+                <button type="button" v-on:click="mostrar(estandar.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;"> criterios </button>
+              </div>
+            </td>
           </tr>
         </td>
       </div>
@@ -65,11 +69,17 @@
                   <td><input type="text" v-model="criterio.observationCriteriaAuditor" placeholder="Escriba aqui su observación" style="width: 300px; height: 100px;"></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="">
-                      <button type="submit" v-on:click="agregarcomentario(criterio.id)" class="btn btn-secondary btn-sm">Agregar Observación</button>
-                      <button type="submit" v-on:click="consultarArchivos(criterio.id)" class="btn btn-primary btn-sm">Ver anexos</button>
+                      <button type="submit" v-on:click="agregarcomentario(criterio.id)" class="btn btn" style="background-color: #20c2b4; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;">Agregar Observación</button>
+                      &nbsp;
+                      <button type="submit" v-on:click="consultarArchivos(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem; border-top-left-radius: .3rem; border-bottom-left-radius: .3rem;">Ver anexos</button>
                     </div>
                   </td>
-                </tr>
+                </tr> 
+                <small class="d-flex justify-content-end mt-3">
+                  <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
+                  &nbsp;
+                  <button type="button" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
+                </small>
               </tbody>
             </table>
           </div>
@@ -105,7 +115,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: rgb(214, 64, 64);
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
@@ -119,6 +129,9 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+}
+.my-container {
+  background-color: white !important;
 }
 </style>
 
