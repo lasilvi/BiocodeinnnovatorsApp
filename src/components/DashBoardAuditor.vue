@@ -75,35 +75,33 @@
                     </div>
                   </td>
                 </tr> 
-                <small class="d-flex justify-content-end mt-3">
-                  <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
-                  &nbsp;
-                  <button type="button" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
-                </small>
               </tbody>
             </table>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <small class="d-flex justify-content-end mt-3">
+                <button type="submit" class="btn btn me-md-2" style="background-color: #117981; color: #F0F0F0">Guardar</button>
+                &nbsp;
+                <button type="button" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
+              </small>
+            </div>
           </div>
-   
-
         </form>
-          
         </div>
-    </div>
-    
-    <div>
-    <button @click="mostrarCuadroFlotante">Mostrar Información</button>
-    <div v-if="mostrarurl">
-      <!-- Contenido del cuadro flotante -->
-      <div class="cuadro-flotante">
-        <p>Los enlaces de los archivos</p>
-        <tr v-for="link in archivos" :key="link.id">
-            <td>{{ link.link }}</td>
-        </tr>
-        <button @click="ocultarCuadroFlotante">Cerrar</button>
+      <div>
+        <button @click="mostrarCuadroFlotante">Mostrar Información</button>
+        <div v-if="mostrarurl">
+          <!-- Contenido del cuadro flotante -->
+          <div class="cuadro-flotante">
+            <p>Los enlaces de los archivos</p>
+            <tr v-for="link in archivos" :key="link.id">
+                <td>{{ link.link }}</td>
+            </tr>
+            <button @click="ocultarCuadroFlotante">Cerrar</button>
+          </div>
+          <!-- Fondo oscuro para el cuadro flotante -->
+          <div class="fondo-cuadro-flotante" @click="ocultarCuadroFlotante"></div>
+        </div>
       </div>
-      <!-- Fondo oscuro para el cuadro flotante -->
-      <div class="fondo-cuadro-flotante" @click="ocultarCuadroFlotante"></div>
-    </div>
     </div>
 
   </div>
