@@ -4,7 +4,7 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
     <div class="d-flex justify-content-between">
         <button type="button" v-on:click="mostrarFormularioDeCreacion()" class="btn btn-success">Nuevo</button>
-          <button type="button" class="btn btn" v-on:click="volverAPaginaAnterior()" style="background-color: #6c757d; color: white;">Volver</button>
+        <button type="button" class="btn btn" v-on:click="volverAPaginaAnterior()" style="background-color: #6c757d; color: white;">Volver</button>
     </div>
     <div class="row">
       <div v-for="servicio in servicios" :key="servicio.id" class="col-md-4 mb-4">  
@@ -37,9 +37,6 @@
             <button type="button" v-on:click="mostrarFormularioDeEdicion(estandar)" class="btn btn" style="background-color: #117981; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Editar</button>
             &nbsp;
             <button type="button" v-on:click="borrarEstandar(estandar.id)" class="btn btn" style="background-color: #811111; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem; border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Borrar</button>
-            
-            
-
           </div>
         </td>
       </tr>

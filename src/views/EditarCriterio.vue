@@ -3,7 +3,7 @@
     <div class="main-content" style="margin-left: 300px;"> 
       <div class="my-3 p-3 bg-body rounded shadow-sm">
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-primary" v-on:click="volverAPaginaAnterior()">Volver</button>
+          <button type="button" class="btn btn" v-on:click="volverAPaginaAnterior()" style="background-color: #6c757d; color: white;">Volver</button>
         </div>
 
         <div class="row">
@@ -23,19 +23,19 @@
           <table class="table">
             <thead>
             <tr>
-              <th scope="col" style="width: 40%;">Descripción</th>
-              <th scope="col" style="width: 20%;">Observación</th>
+              <th scope="col" style="width: 23%;">Descripción</th>
+              <th scope="col" style="width: 23%;">Observación</th>
               <th scope="col" style="width: 10%;">Respuesta</th>
               <th scope="col" style="width: 20%;">Observación auditor</th>
-              <th scope="col" style="width: 10%;">Acciones</th>
+              <th scope="col" style="width: 20%;">Acciones</th>
             </tr>
           </thead>
 
           <tr>
-      <td><input type="text" v-model="nuevoCriterio.description"></td>
-      <td><input type="text" v-model="nuevoCriterio.observation"></td>
+      <td><input type="text" v-model="nuevoCriterio.description" style="border-radius: .3rem;"></td>
+      <td><input type="text" v-model="nuevoCriterio.observation" style="border-radius: .3rem;"></td>
       <td>
-        <select v-model="nuevoCriterio.answer">
+        <select v-model="nuevoCriterio.answer" style="border-radius: .3rem;">
           <option value="C">C</option>
           <option value="NC">NC</option>
           <option value="NA">NA</option>
@@ -49,21 +49,27 @@
       </td>
     </tr>
             <tr v-for="criterio in criterios" :key="criterio.id">
-              <td><input type="text" v-model="criterio.description"></td>
-              <td><input type="text" v-model="criterio.observation"></td>
-              <td><select v-model="criterio.answer">
+              <td><input type="text" v-model="criterio.description" style="border-radius: .3rem;"></td>
+              <td><input type="text" v-model="criterio.observation" style="border-radius: .3rem;"></td>
+              <td><select v-model="criterio.answer" style="border-radius: .3rem; text-align: center;">
                 <option value="C">C</option>
                 <option value="NC">NC</option>
                 <option value="NA">NA</option>
               </select></td>
-              <td><input type="text" v-model="criterio.observationAuditor"></td>
+              <td><input type="text" v-model="criterio.observationAuditor" style="border-radius: .3rem;"></td>
             
            
               <td>
-                  <div class="d-flex" role="group" aria-label="">
-                  <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary btn-sm">Agregar archivo</button>
-                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-primary btn-sm">Editar</button>
-                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger btn-sm">Borrar</button>
+                  <div class="btn-group" role="group" aria-label="">
+                    <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="23" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                      </svg>
+                    </button>
+                    &nbsp;
+                    <button type="submit" v-on:click="submitForm(criterio)" class="btn btn" style="background-color: #117981; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Editar</button>
+                    &nbsp;
+                    <button type="submit" v-on:click="submitForm(criterio)" class="btn btn" style="background-color: #811111; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem; border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Borrar</button>
                 </div>
               </td>
               <td>
