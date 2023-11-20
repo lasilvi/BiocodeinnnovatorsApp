@@ -6,7 +6,7 @@
       </a>
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <span style="font-weight: bold; font-size: larger;">Usuario Auditor</span>
+          <span style="font-weight: bold; font-size: larger;">Auditor</span>
           <br>
           <span style="font-size: medium;"><strong>{{dataUser['name']}}</strong></span>
           <br>
@@ -29,7 +29,7 @@
           <tbody>
             <tr v-for="servicio in servicios" :key="servicio.id">
               <td >{{ servicio.name }}</td>
-              <td>{{ servicio.description }}</td>
+              <td style="text-align: justify;">{{ servicio.description }}</td>
               <td>
                 <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: 
 #003e4b; color: #F0F0F0;">Ver estandares</button>
@@ -66,7 +66,7 @@
                   <td>{{ criterio.description }}</td>
                   <td>{{ criterio.observation }}</td>
                   <td>{{ criterio.answer }}</td>
-                  <td><input type="text" v-model="criterio.observationCriteriaAuditor" placeholder="Escriba aqui su observación" style="width: 300px; height: 100px;"></td>
+                  <td><input type="text" v-model="criterio.observationCriteriaAuditor" placeholder="Escriba aqui su observación" style="width: 100%; height: 100%;"></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="">
                       <button type="submit" v-on:click="agregarcomentario(criterio.id)" class="btn btn" style="background-color: #20c2b4; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;">Agregar Observación</button>

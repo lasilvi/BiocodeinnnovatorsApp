@@ -30,13 +30,15 @@
         <td>{{ estandar.description }}</td>
         <td>
           <div class="btn-group" role="group" aria-label="">
-            <button type="button" v-on:click="mostrarFormularioDeEdicion(estandar)" class="btn btn" style="background-color: #117981; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;">Editar</button>
-            &nbsp;
-            <button type="button" v-on:click="borrarEstandar(estandar.id)" class="btn btn" style="background-color: #811111; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem; border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Borrar</button>
-            &nbsp;
-            <a :href="'/EditarCriterio/' + estandar.id + '/' + servicioId" style="background-color: #CBDC3A; color: black; padding: 10px 20px; text-decoration: none; border: none; border-radius: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <a :href="'/EditarCriterio/' + estandar.id + '/' + servicioId" style="background-color: #003e4b; color: #F0F0F0; padding: 10px 20px; text-decoration: none; border: none; border-radius: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg></a>
+            &nbsp;
+            <button type="button" v-on:click="mostrarFormularioDeEdicion(estandar)" class="btn btn" style="background-color: #117981; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Editar</button>
+            &nbsp;
+            <button type="button" v-on:click="borrarEstandar(estandar.id)" class="btn btn" style="background-color: #811111; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem; border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Borrar</button>
+            
+            
 
           </div>
         </td>

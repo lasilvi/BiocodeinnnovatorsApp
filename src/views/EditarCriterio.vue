@@ -3,7 +3,7 @@
     <div class="main-content" style="margin-left: 300px;"> 
       <div class="my-3 p-3 bg-body rounded shadow-sm">
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn" v-on:click="volverAPaginaAnterior()" style="background-color: #6c757d; color: white;">Volver</button>
+          <button type="button" class="btn btn-primary" v-on:click="volverAPaginaAnterior()">Volver</button>
         </div>
 
         <div class="row">
@@ -57,25 +57,21 @@
                 <option value="NA">NA</option>
               </select></td>
               <td><input type="text" v-model="criterio.observationAuditor"></td>
+            
+           
               <td>
-                  <div class="btn-group" role="group" aria-label="">
-                    <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn" style="background-color: #CBDC3A; color: black;  border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                      </svg>
-                    </button>
-                    &nbsp;
-                    <button type="submit" v-on:click="submitForm(criterio)" class="btn btn" style="background-color: #117981; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Editar</button>
-                    &nbsp;
-                    <button type="submit" v-on:click="submitForm(criterio)" class="btn btn" style="background-color: #811111; color: #F0F0F0; border-top-right-radius:.3rem; border-bottom-right-radius: .3rem; border-top-left-radius:.3rem; border-bottom-left-radius: .3rem;">Borrar</button>
+                  <div class="d-flex" role="group" aria-label="">
+                  <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn-secondary btn-sm">Agregar archivo</button>
+                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-primary btn-sm">Editar</button>
+                  <button type="submit" v-on:click="submitForm(criterio)" class="btn btn-danger btn-sm">Borrar</button>
                 </div>
               </td>
               <td>
             
             <form  v-if="mostrarFormulario">
-                    <input type="text" class="form-control" v-model="criterio.archivo" name="archivo" style="margin-bottom: 10px;">
-                    <button type="submit" v-on:click="subirArchivo(criterio.id,criterio.archivo) " class="btn btn" style="background-color: #198754; color:#F0F0F0">Cargar archivo</button>
-              </form>
+                    <input type="text" class="form-control" v-model="criterio.archivo" name="archivo">
+                    <button type="submit" v-on:click="subirArchivo(criterio.id,criterio.archivo) " class="btn btn-secondary">Cargar archivo</button>
+            </form>
 
          </td>
               </tr>
