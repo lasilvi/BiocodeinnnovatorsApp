@@ -14,7 +14,7 @@
         </li>
       </ul>
     </header>
-
+    <h1 style="text-align: center;">Bienvenido auditor</h1>
     <div class="p-5 mb-4 rounded-3">
       <div class="container-fluid py-5">
         <div style="display: flex;">
@@ -32,7 +32,7 @@
               <td style="text-align: justify;">{{ servicio.description }}</td>
               <td>
                 <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: 
-#003e4b; color: #F0F0F0;">Ver estandares</button>
+                    #003e4b; color: #F0F0F0;">Ver estandares</button>
               </td>
             </tr>
           </tbody>
