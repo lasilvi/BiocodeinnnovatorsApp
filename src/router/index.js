@@ -4,7 +4,8 @@ import DashBoardAdmin from '../components/DashBoardAdmin.vue'
 import DashBoardAdmin2 from '../components/DashBoardAdmin2.vue'
 import DashBoardUser from '../components/DashBoardUser.vue'
 import DashBoardAuditor from '../components/DashBoardAuditor.vue'
-//import LoginView from '../components/LoginView.vue'
+import CriteriosUser from '../views/CriteriosUser.vue'
+
 //usuarios
 import EditarUsuario from '../views/EditarUsuario.vue'
 //servicios
@@ -20,6 +21,11 @@ import LoginView from '../components/LoginView.vue'
 
 
 const routes = [
+  {
+    path: '/CriteriosUser',
+    name: 'CriteriosUser',
+    component: CriteriosUser
+  },
   {
     path: '/Login',
     name: 'Login',

@@ -42,7 +42,7 @@
             <td >{{ estandar.name }}</td> 
             <td>  
               <div class="btn-group" role="group" aria-label="">
-                <button type="button" v-on:click="mostrar(estandar.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;"> criterios </button>
+                <button type="button" v-on:click="mostrar(estandar.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;"> Ver criterios </button>
               </div>
             </td>
           </tr>
@@ -88,7 +88,7 @@
         </form>
         </div>
       <div>
-        <button @click="mostrarCuadroFlotante">Mostrar Información</button>
+        
         <div v-if="mostrarurl">
           <!-- Contenido del cuadro flotante -->
           <div class="cuadro-flotante">

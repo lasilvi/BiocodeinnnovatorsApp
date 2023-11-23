@@ -73,7 +73,7 @@
      <small class="d-block text-end mt-3">
        <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
         &nbsp;
-        <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
+        <button type="button" @click="cancelarFormularioEditarServicio" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
      </small>
    </div>
  </form>
@@ -116,7 +116,7 @@
       <small class="d-block text-end mt-3">
         <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0" >Guardar</button>
         &nbsp;
-        <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
+        <button type="button" @click="cancelarFormularioCrearServicio" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
       </small>
     </div>
   </form>
@@ -150,6 +150,15 @@ export default {
         this.consultarServicios();
     },
  methods: {
+  // Método para ocultar el formulario de edición
+  cancelarFormularioCrearServicio() {
+    this.mostrarFormulariocreacion = false;
+    },
+  // Método para ocultar el formulario de creación
+  cancelarFormularioEditarServicio() {
+    this.mostrarFormulario = false;
+    },
+
   EditarServicio(servicio) {
       // Establecer el usuario seleccionado y activar el modo de edición
       this.selectedUser = servicio;

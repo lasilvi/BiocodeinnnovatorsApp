@@ -6,6 +6,7 @@
         <button type="button" v-on:click="mostrarFormularioDeCreacion()" class="btn btn-success">Nuevo</button>
         <button type="button" class="btn btn" v-on:click="volverAPaginaAnterior()" style="background-color: #6c757d; color: white;">Volver</button>
     </div>
+    <br>
     <div class="row">
       <div v-for="servicio in servicios" :key="servicio.id" class="col-md-4 mb-4">  
         <div><p style="font-size: 18px;  font-weight: bold;">{{ servicio.name }}</p></div>
@@ -84,7 +85,7 @@
         <small class="d-block text-end mt-3">
           <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
           &nbsp;
-          <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
+          <button type="button" @click="cancelarFormularioEditarEstandar" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
         </small>
       </div>
     </form>
@@ -128,7 +129,7 @@
           <small class="d-block text-end mt-3">
             <button type="submit" class="btn btnbtn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
             &nbsp;
-            <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
+            <button type="button" @click="cancelarFormularioCrearEstandar" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
           </small>
         </div>
       </form>
@@ -172,6 +173,15 @@ export default {
         this.consultarServicio(this.servicioId)
     },
  methods: {
+  // Método para ocultar el formulario de edición
+  cancelarFormularioCrearEstandar() {
+    this.mostrarFormulariocreacion = false;
+    },
+  // Método para ocultar el formulario de creación
+  cancelarFormularioEditarEstandar() {
+    this.mostrarFormulario = false;
+    },
+
   volverAPaginaAnterior() {
     this.$router.go(-1); // Navegar hacia atrás en el historial
   },
