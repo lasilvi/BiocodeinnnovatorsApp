@@ -18,7 +18,7 @@
     <div class="sidebar" style="background-color: #003e4b;">
       <div class="sidebar-header">
         <router-link to="/DashBoardAdmin2" class="nav-link" style="color: gray;">
-          <h4 style="color: white;">Biocodeinnovators</h4>
+          <h4 style="color: white;">BioCodeInnovators</h4>
         </router-link>
       </div>
       <li class="border-top my-3"></li>
@@ -82,6 +82,7 @@
     </div>
     <div class="background-container" style="text-align: justify;">
     <div class="dashboard-content" style="text-align:center; margin-right: 10%; margin-top: 1%; margin-left: 2%;">
+      <br>
         <h1>Bienvenido al Dashboard del Administrador</h1>
 
         <p style="text-align: justify; padding-left: 10%; margin-right: 10%;">

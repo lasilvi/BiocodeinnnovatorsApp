@@ -65,21 +65,21 @@
         </div>
       </div>
     </div>
-   <div class="d-flex text-body-secondary pt-3">
-    <div class="contenedor-icono" style="margin-right: 1%; height: 5%;">
+    <div class="d-flex text-body-secondary pt-3">
+      <div class="contenedor-icono" style="margin-right: 1%; height: 5%;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
           <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
         </svg>
       </div>
-     <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-       <div class="d-flex justify-content-between">
-         <strong class="text-gray-dark">Contraseña</strong>
-       </div>
-       <div class="form-group">
-         <input type="password" placeholder="Contraseña" class="form-control" id="phoneEntity" v-model="passwordUser" hidden required>
-       </div>
-     </div>
-   </div>
+      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+        <div class="d-flex justify-content-between">
+          <strong class="text-gray-dark">Contraseña</strong>
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Contraseña" class="form-control" id="passwordUser" v-model="passwordUser" required>
+        </div>
+      </div>
+    </div>
    <div class="d-flex text-body-secondary pt-3">
     <div class="contenedor-icono" style="margin-right: 1%;">
         <svg xmlns="http://www.w3.org/2000/svg" width="5" height="5" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
@@ -121,7 +121,7 @@
       </div>
      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
        <div class="d-flex justify-content-between">
-         <strong class="text-gray-dark">Telefono</strong>
+         <strong class="text-gray-dark">Teléfono</strong>
        </div>
        <div class="form-group">
            <input type="text" placeholder="Telefono" class="form-control" id="phoneEntity" v-model="phoneUser" required>
@@ -134,7 +134,7 @@
      <small class="d-block text-end mt-3">
        <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0">Guardar</button>
         &nbsp;
-        <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
+        <button type="button" @click="cancelarFormularioEdicion" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
      </small>
    </div>
  </form>
@@ -228,7 +228,7 @@
       </div>
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
-          <strong class="text-gray-dark">Telefono</strong>
+          <strong class="text-gray-dark">Teléfono</strong>
         </div>
         <div class="form-group">
             <input type="text" placeholder="Telefono" class="form-control" id="phoneUser" v-model="phoneUser" required>
@@ -254,12 +254,11 @@
         </div>
       </div>
     </div>
-    
-    
+
       <small class="d-block text-end mt-3">
         <button type="submit" class="btn btn" style="background-color: #117981; color: #F0F0F0" >Guardar</button>
         &nbsp;
-        <button type="button"  class="btn btn" style="background-color: #811111; color: #F0F0F0" >Cancelar</button>
+        <button type="button" @click="cancelarFormularioCreacion" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
       </small>
     </div>
   </form>
@@ -299,6 +298,14 @@ export default {
         this.consultarUsuarios();
     },
  methods: {
+  // Método para ocultar el formulario de edición
+  cancelarFormularioEdicion() {
+    this.mostrarFormulario = false;
+    },
+  // Método para ocultar el formulario de creación
+  cancelarFormularioCreacion() {
+    this.mostrarFormulariocreacion = false;
+    },
   mostrarFormularioDeEdicion(usuario) {
     // Otras lógicas si las hay
     this.EditarUsuario(usuario)

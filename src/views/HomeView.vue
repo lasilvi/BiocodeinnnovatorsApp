@@ -7,12 +7,12 @@
        <div class="row">
          <div class="col-sm-8 col-md-7 py-4">
            <h4>Sobre Nosotros</h4>
-           <p class="text-body-secondary">En bioCode Innovators, estamos en la vanguardia de la innovación tecnológica y el desarrollo web. Nuestra pasión por la creación de experiencias digitales excepcionales se refleja en cada proyecto que emprendemos.</p>
+           <p class="text-body-secondary">En BioCodeInnovators, estamos en la vanguardia de la innovación tecnológica y el desarrollo web. Nuestra pasión por la creación de experiencias digitales excepcionales se refleja en cada proyecto que emprendemos.</p>
          </div>
          <div class="col-sm-4 offset-md-1 py-4">
-           <h4>Contactanos</h4>
+           <h4>Contáctenos</h4>
            <ul class="list-unstyled">
-             <li><a href="#" class="text-white">Siguenos en Twitter</a></li>
+             <li><a href="#" class="text-white">Síguenos en Twitter</a></li>
              <li><a href="#" class="text-white">Like en Facebook</a></li>
              <li><a href="#" class="text-white">Correo</a></li>
            </ul>
@@ -64,7 +64,7 @@
           <div style="text-align: center;">
             <h5 style="font-size: 2em;">Usuario</h5>
           </div>
-          <p style="text-align: justify; max-width: 600px; margin: 20px auto;  font-size: 1.2em">La plataforma de autoevaluación esta diseñada para monitorear y mejorar el cumplimiento 
+          <p style="text-align: justify; max-width: 600px; margin: 20px auto;  font-size: 1.2em">La plataforma de autoevaluación está diseñada para monitorear y mejorar el cumplimiento 
                 de los estándares de habilitación en su organización de salud. A través de la plataforma, 
                 pueden acceder a información visual, cargar documentos relevantes y recibir orientación 
                 para garantizar que la organización cumpla con los estándares y pueda proporcionar 
@@ -79,7 +79,7 @@
             <h5 style="font-size: 2em;">Auditor</h5>
           </div>
           <p style="text-align: justify; max-width: 600px; margin: 20px auto;  font-size: 1.2em">La plataforma permite la supervisión y evaluación de las organizaciones de salud asignadas. 
-                permite enviar recomendaciones, llevar a cabo revisiones y evaluar el cumplimiento de estándares. 
+                Permite enviar recomendaciones, llevar a cabo revisiones y evaluar el cumplimiento de estándares. 
                 Permitiendo colaborar a que las organizaciones cumplan con los requisitos establecidos y mantengan altos estándares de calidad 
                 y seguridad en la atención médica que brindan.
           </p>
@@ -170,7 +170,7 @@
      <section class="py-5 text-center container">
        <div class="row py-lg-5" data-aos="flip-down">
          <div class="col-lg-6 col-md-8 mx-auto">
-           <h1 class="fw-light">Quienes somos</h1>
+           <h1 class="fw-light">Quiénes somos</h1>
            <p class="lead text-body-secondary" style="text-align: justify;">Fundada con la visión de fusionar la biotecnología y el código, nuestra empresa se ha convertido en un referente en el mundo del desarrollo web. Nuestro equipo de expertos en diseño, programación y marketing digital trabaja incansablemente para transformar ideas en realidades digitales impactantes. Desde sitios web a medida hasta aplicaciones interactivas, en bioCode Innovators, creamos soluciones web que no solo impresionan visualmente, sino que también impulsan el éxito de nuestros clientes en el mundo en línea. ¡Únete a nosotros en este emocionante viaje hacia un futuro digital más brillante!</p>
          </div>
        </div>

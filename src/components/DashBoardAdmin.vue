@@ -18,7 +18,7 @@
     <div class="sidebar" style="background-color: #003e4b;">
       <div class="sidebar-header">
         <router-link to="/DashBoardAdmin2" class="nav-link" style="color: gray;">
-          <h4 style="color: white;">Biocodeinnovators</h4>
+          <h4 style="color: white;">BioCodeInnovators</h4>
         </router-link>
       </div>
       <li class="border-top my-3"></li>
