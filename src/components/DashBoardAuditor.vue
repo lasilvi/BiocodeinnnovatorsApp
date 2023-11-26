@@ -1,4 +1,15 @@
 <template>
+
+<!-- <div>
+  <label for="usuarios">Seleccionar Usuario:</label>
+  <select v-model="usuarioSeleccionado" @change="cargarInformacionUsuario">
+    <option v-for="usuario in listaUsuarios" :key="usuario.id" :value="usuario.id">
+      {{ usuario.nombre }}
+    </option>
+  </select>
+</div> -->
+<!-- 
+<div v-if="usuarioSeleccionado"> -->
   <div class="container" style="background-color: white !important; ">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -18,6 +29,7 @@
     <div class="p-5 mb-4 rounded-3">
       <div class="container-fluid py-5">
         <div style="display: flex;">
+          <!-- Tabla de servicios -->
         <table class="table table-no-background">
           <thead>
             <tr>
@@ -32,32 +44,45 @@
               <td style="text-align: justify;">{{ servicio.description }}</td>
               <td>
                 <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: 
-                    #003e4b; color: #F0F0F0;">Ver estandares</button>
+                    #003e4b; color: #F0F0F0;" @click="selectedServiceName = servicio.name">Ver estándares</button>
               </td>
             </tr>
           </tbody>
         </table>
-        <td>
-          <tr v-for="estandar in estandares" :key="estandar.id">
-            <td >{{ estandar.name }}</td> 
-            <td>  
-              <div class="btn-group" role="group" aria-label="">
-                <button type="button" v-on:click="mostrar(estandar.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;"> Ver criterios </button>
-              </div>
-            </td>
-          </tr>
-        </td>
       </div>
-
+      <!-- Tabla de estándares -->
+        <div v-if="estandares.length > 0">
+          <h2>Estandares ({{ selectedServiceName }})</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="estandar in estandares" :key="estandar.id">
+              <td>{{ estandar.name }}</td>
+              <td>
+                <div class="btn-group" role="group" aria-label="">
+                  <button type="button" v-on:click="mostrar(estandar.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;"> Ver criterios </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+        <!-- Formulario de criterios -->
         <form @submit.prevent="submitForm" v-if="mostrarEstandaresCriterios">
           <div v-if="mostrarEstandaresCriterios">
+            <h2>Criterios ({{ selectedStandardName }})</h2> 
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col" style="width: 20%;">Descripción</th>
-                  <th scope="col" style="width: 20%;">Observación</th>
+                  <th scope="col" style="width: 20%;">Observación del usuario</th>
                   <th scope="col" style="width: 5%;">Respuesta</th>
-                  <th scope="col" style="width: 30%;">Observación auditores</th>
+                  <th scope="col" style="width: 30%;">Observación auditor</th>
                   <th scope="col" style="width: 5%;">Acciones</th>
                 </tr>
               </thead>
@@ -69,7 +94,7 @@
                   <td><input type="text" v-model="criterio.observationCriteriaAuditor" placeholder="Escriba aqui su observación" style="width: 100%; height: 100%;"></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="">
-                      <button type="submit" v-on:click="agregarcomentario(criterio.id)" class="btn btn" style="background-color: #20c2b4; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;">Agregar Observación</button>
+                      <button type="submit" v-on:click="agregarcomentario(criterio.id)" class="btn btn" style="background-color: #20c2b4; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;">Agregar observación</button>
                       &nbsp;
                       <button type="submit" v-on:click="consultarArchivos(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem; border-top-left-radius: .3rem; border-bottom-left-radius: .3rem;">Ver anexos</button>
                     </div>
@@ -81,7 +106,7 @@
               <small class="d-flex justify-content-end mt-3">
                 <button type="submit" class="btn btn me-md-2" style="background-color: #117981; color: #F0F0F0">Guardar</button>
                 &nbsp;
-                <button type="button" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
+                <button type="button" @click="cancelarFormulario" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
               </small>
             </div>
           </div>
@@ -103,8 +128,8 @@
         </div>
       </div>
     </div>
-
-  </div>
+</div>
+  <!-- </div> -->
     <div class="alert alert-success fixed-bottom mx-auto" v-if="mostrarMensaje">{{ mensaje }}</div>
   </template>
 <style scoped>
@@ -137,6 +162,10 @@
   export default {
     data() {
       return {
+        listaUsuarios: [],
+        usuarioSeleccionado: null,
+        selectedServiceName: null,
+        selectedStandardName:null,
         dataUser:{},
         servicios: [],
         archivos: [],
@@ -162,11 +191,26 @@
     },
 
     methods: {
+
+      cargarInformacionUsuario() {
+    // Verifica que se haya seleccionado un usuario
+    if (!this.usuarioSeleccionado) {
+      return;
+    }
+
+    // Llama a los métodos existentes para cargar la información relacionada con el usuario seleccionado
+    this.consultarServicios(); // Ajusta según tu lógica existente
+    this.consultarEstandares(this.usuarioSeleccionado); // Ajusta según tu lógica existente
+    // ... otros métodos necesarios ...
+  },
       mostrarCuadroFlotante() {
       this.mostrarurl = true;
     },
     ocultarCuadroFlotante() {
       this.mostrarurl = false;
+    },
+    cancelarFormulario() {
+      this.mostrarEstandaresCriterios = false;
     },
       sessionClose(){
       localStorage.clear(),
@@ -191,8 +235,30 @@
     mostrar(estandar) {
         // Otras lógicas si las hay
         this.consultarCriterio(estandar);
+        this.selectedStandardName = estandar.name;
         this.mostrarEstandaresCriterios = true;
     },
+
+    obtenerListaUsuarios() {
+        // Envía los datos a la API utilizando fetch
+        const operation = "queryUserByEntity";
+        const tna = 7;
+        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
+        const userEntityId = 89;
+        fetch(
+          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&userEntityId=${userEntityId}&key=${key}`,
+          
+          { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
+        )
+        .then(respuesta=>respuesta.json())
+        .then((datosRespuesta)=>{
+          const usuarios = datosRespuesta.arrayUser;
+          console.log(usuarios); 
+          this.usuarios = datosRespuesta.arrayUser;
+        })
+        .catch(console.log)
+  },
+
     consultarServicios(){
             // Envía los datos a la API utilizando fetch
         const operation = "queryServiceByEntity";
@@ -277,7 +343,6 @@
         .catch(console.log)
     },
     agregarcomentario(criterio) {
-
       // Envía los datos a la API utilizando fetch
       const operation = "UpdateCriteria";
       const tna = 7;

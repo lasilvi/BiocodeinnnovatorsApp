@@ -3,7 +3,7 @@
    <div class="main-content" style="margin-left: 300px;"> 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
     <div class="d-flex justify-content-between">
-        <button type="button" v-on:click="mostrarFormularioDeCreacion()" class="btn btn-success">Nuevo</button>
+        <button type="button" v-on:click="mostrarFormularioDeCreacion()" class="btn btn-success">Nuevo estándar</button>
         <button type="button" class="btn btn" v-on:click="volverAPaginaAnterior()" style="background-color: #6c757d; color: white;">Volver</button>
     </div>
     <br>
