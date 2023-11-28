@@ -18,7 +18,6 @@
     <thead>
       <tr>
         <th scope="col">Nombre</th>
-        <th scope="col">ID</th>
         <th scope="col">Descripción</th>
         <th scope="col">Acciones</th>
         
@@ -27,7 +26,6 @@
     <tbody>
       <tr v-for="estandar in estandares" :key="estandar.id">
         <td>{{ estandar.name }}</td>
-        <td>{{ estandar.id }}</td>
         <td>{{ estandar.description }}</td>
         <td>
           <div class="btn-group" role="group" aria-label="">

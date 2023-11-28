@@ -98,6 +98,7 @@ export default {
 
                   localStorage.setItem('userid', this.datos_Respuesta.id);
                   localStorage.setItem('name', this.datos_Respuesta.nickname);
+                  localStorage.setItem('id', this.datos_Respuesta.entityID);
 
                 console.log("Tipo usu: ",this.datos_Respuesta.userType );
                 

@@ -120,6 +120,9 @@
       </small>
     </div>
   </form>
+  <div class="alert alert-success fixed-bottom mx-auto" v-if="mostrarMensaje">
+      {{ mensaje }}
+    </div>
 
    </div>
  </template>
@@ -144,6 +147,7 @@ export default {
     nameService: "",
     descriptionService: "",
     idService: "",
+    mostrarMensaje: false,
    };
  },
  created:function(){
@@ -219,9 +223,28 @@ export default {
        .then((respuesta) => respuesta.json())
        .then((datosRespuesta) => {
          console.log(datosRespuesta);
-         this.consultarServicios();
-       })
-       .catch(console.log);
+         if (datosRespuesta.userVO) {
+            this.mensaje = "Servicio registrado exitosamente";
+          
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          } else {
+            // Si no se encuentra la clave userVO en la respuesta, muestra un mensaje de error
+            this.mensaje = "Hubo un error al guardar el servicio.";
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          }
+          this.mostrarFormulariocreacion = false;
+          this.consultarServicios();
+        }).catch(console.log);
 
      // Limpia el formulario después de enviar los datos
      this.nameService = ' ';

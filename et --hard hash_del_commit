@@ -1,0 +1,167 @@
+[33mcommit fd2875768dc562c9def0563567e1a37fb425d96d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sun Nov 19 14:20:41 2023 -0500
+
+    servicios
+
+[33mcommit 18fdc5ca95deb9aced44cefde7f23e48683f0985[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sun Nov 19 13:41:50 2023 -0500
+
+    visual de editar usuario
+
+[33mcommit 08708e3c0a95ba27aaa85e7fcba53ba2ea445991[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sun Nov 19 11:27:13 2023 -0500
+
+    arreglao letras del admin
+
+[33mcommit 31625d02ee775c2d84d7e45acdb0f26ca28af1dc[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sun Nov 19 11:07:22 2023 -0500
+
+    vista de login ready
+
+[33mcommit 07000121eec27fd56e369b45e7fa4ae401baeda9[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sun Nov 19 08:59:58 2023 -0500
+
+    Fondo
+
+[33mcommit 09ea0fe2fc149340c7b120395a64d3f5d8f33276[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sat Nov 18 17:45:54 2023 -0500
+
+    homepage terminada
+
+[33mcommit 9d1e683c7a1cc28de188de0533345aa85524b930[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sat Nov 18 13:12:22 2023 -0500
+
+    visual
+
+[33mcommit 07ffdd8562950add06951f89570c84ccde0e1a81[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sat Nov 18 09:47:16 2023 -0500
+
+    vistas
+
+[33mcommit f3dd71d1e950c526310e818a36ec85d987e23e17[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Sat Nov 18 00:16:32 2023 -0500
+
+    navbarHeader
+
+[33mcommit f2f76a82f2c06c19cf022ec081fae56e3cb49c6b[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Fri Nov 17 22:59:41 2023 -0500
+
+    slides
+
+[33mcommit ec2268de180ce55f8228378594c91a4e67ca0764[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Fri Nov 17 22:19:08 2023 -0500
+
+    solucion errores
+
+[33mcommit 1168499931e29d54b60223770d67e237eac34cf3[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Fri Nov 17 21:26:25 2023 -0500
+
+    visual
+
+[33mcommit 07c3bcb1452e5a8ff256b4a0c0df7deea0277532[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Fri Nov 17 21:00:42 2023 -0500
+
+    edicion auditor
+
+[33mcommit 020d53e17f499ccdf7d3f2713bf87178f936c6bb[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Thu Nov 16 20:33:40 2023 -0500
+
+    edicion
+
+[33mcommit 11c239b64c2a82ca09ea8d1715ecd6d825a8730a[m
+Author: isabella <danna.garcia@udea.edu.co>
+Date:   Thu Nov 16 15:17:10 2023 -0500
+
+    edicion
+
+[33mcommit 6cfd3c8683507e7c690f23dfb82419994e578c52[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Thu Nov 16 13:25:08 2023 -0500
+
+    edicion
+
+[33mcommit daa45ec25b40c210723e38d2b000f42a32ff5d2b[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Thu Nov 16 12:18:51 2023 -0500
+
+    edicion login
+
+[33mcommit ee71339ce43fbfb637033f6c61961cfa2265503c[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Thu Nov 16 10:16:35 2023 -0500
+
+    edicion auditor
+
+[33mcommit 572dc529761624e20d74f519f9d7db8c35837630[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Sat Nov 11 15:42:39 2023 -0500
+
+    edi
+
+[33mcommit e1d7f0d78a03a6161718ee76815354b2c0aa0c83[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Thu Nov 9 12:32:48 2023 -0500
+
+    ediciones
+
+[33mcommit 76cb46ab2334bc321dca02bc539cde9fa95c2acb[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Tue Nov 7 12:33:38 2023 -0500
+
+    login v2
+
+[33mcommit 7263f1d57b48859766dd735bd24db48731c48e26[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Tue Nov 7 12:00:10 2023 -0500
+
+    login
+
+[33mcommit debdfac367003c3c9edf249eba7e5b9d130c4069[m
+Author: unknown <silvania.ramos@udea.edu.co>
+Date:   Thu Nov 2 10:39:50 2023 -0500
+
+    ediciones admin
+
+[33mcommit 6d8322a53f96c598fdca2a03572e143a76c717d4[m
+Author: lasilvi <silvania.ramos@udea.edu.co>
+Date:   Tue Oct 24 12:51:53 2023 -0500
+
+    edicion
+
+[33mcommit 3b7724095e2eb0f0ca0d53361b7d5c8dda531f74[m
+Author: lasilvi <silvania.ramos@udea.edu.co>
+Date:   Tue Oct 24 11:10:35 2023 -0500
+
+    cambios
+
+[33mcommit dd7a6fd19a30e583dfb9a21fdfad6263f9c3c8eb[m
+Author: lasilvi <silvania.ramos@udea.edu.co>
+Date:   Mon Oct 23 21:23:51 2023 -0500
+
+    ediciones
+
+[33mcommit 35b3f17426e8fb47c4419079eaf7267fb2b2f372[m
+Author: lasilvi <silvania.ramos@udea.edu.co>
+Date:   Thu Oct 12 09:24:37 2023 -0500
+
+    proyecto
+
+[33mcommit a708e0dda99c4b496bd85eb2bc12cfba5349f671[m
+Author: lasilvi <silvania.ramos@udea.edu.co>
+Date:   Sun Oct 8 20:40:53 2023 -0500
+
+    init

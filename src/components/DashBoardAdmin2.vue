@@ -1,20 +1,5 @@
 <template>
   <div>
-    <div class="container">
-      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <span style="font-weight: bold; font-size: larger;">Administrador</span>
-            <br>
-            <span style="font-size: medium;">{{dataUser['name']}}</span>
-          </li>
-        </ul>
-      </header>
-    </div>
     <div class="sidebar" style="background-color: #003e4b;">
       <div class="sidebar-header">
         <router-link to="/DashBoardAdmin2" class="nav-link" style="color: gray;">
@@ -80,6 +65,28 @@
         </li>
       </ul>
     </div>
+    <div class="container">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <span style="font-weight: bold; font-size: larger;">Administrador</span>
+            <br>
+            <span style="font-size: medium;">{{dataUser['name']}}</span>
+          </li>
+        </ul>
+      </header>
+      <div class="main-content" style="margin-left: 300px;">
+      <div class="chart-container">
+          <canvas id="grafica1"></canvas>
+      </div>
+      <div class="chart-container">
+          <canvas id="grafica2"></canvas>
+      </div>
+    </div> 
     <div class="background-container" style="text-align: justify;">
     <div class="dashboard-content" style="text-align:center; margin-right: 10%; margin-top: 1%; margin-left: 2%;">
       <br>
@@ -99,25 +106,37 @@
         <p style="text-align: justify; padding-left: 10%; margin-right: 10%;">
             Los administradores también contarán con la capacidad de realizar estas acciones para garantizar un adecuado funcionamiento del sistema.
         </p>
+        
     </div>
+    
 </div>
+</div>
+  
 
   </div>
 </template>
 <script>
-
+import Chart from 'chart.js/auto';
 console.log(localStorage.getItem('name'))
+console.log(localStorage.getItem('id'))
 export default {
+  mounted() {
+    
+    this.renderChart('grafica1', ['Enero', 'Febrero', 'Marzo', 'Abril'], [1, 2, 3, 4], 'Ejemplo 1');
+    this.renderChart('grafica2', ['Enero2', 'Febrero', 'Marzo', 'Abril'], [1, 2, 3, 4], 'Ejemplo 1');
+
+  },
   data() {
     return {
-      Entidades:[],
+      servicios:[],
       dataUser:{}
     };
   },
   created:function(){
     this.queryLocalStorage(); 
     this.checkSessionAndFetchData();
-    this.submitForm();
+    this.consultarServicios();
+  
         
 
     },
@@ -138,36 +157,132 @@ export default {
       this.$router.push({name:'Login'});
       return; // Detiene la ejecución del método
     }},
-    submitForm() {
-    fetch(
-      `https://redb.qsystems.co/QS3100/QServlet?operation=queryEntityByTenancy&tna=7&key=c94ad623-f583-46ed-b5e0-54f402e83ad0`,
-      { method: "GET" }
-    )
-      .then((respuesta) => {
-        if (!respuesta.ok) {
-          throw new Error('La solicitud no pudo ser completada correctamente.');
-        }
-        return respuesta.json(); // Parsea la respuesta JSON
-      })
-      .then((datosRespuesta) => {
-        console.log(datosRespuesta);
-        this.Entidades = [];
-
-        if (datosRespuesta && datosRespuesta.valid && Array.isArray(datosRespuesta.arrayEntity)) {
-          // Asigna el array de entidades a this.Entidades
-          this.Entidades = datosRespuesta.arrayEntity;
-        }
-      })
-      .catch((error) => {
-        console.error('Error al cargar los datos:', error);
-        // Puedes manejar el error aquí, mostrar un mensaje de error, etc.
-      });
-  },
+    
 
   sessionClose(){
       localStorage.clear(),
       this.$router.push({name:'home'});
     },
+    renderChart(chartId, labels, data1, label) {
+      const graph = document.getElementById(chartId);
+
+      const data = {
+        labels: labels,
+        datasets: [{
+          label: label,
+          data: data1,
+          backgroundColor: 'rgba(9, 129, 176, 0.2)'
+        }]
+      };
+
+      const config = {
+        type: 'bar',
+        data: data,
+      };
+
+     
+
+      // Ajusta el tamaño del contenedor y del gráfico
+      const canvasContainer = graph.parentElement;
+      canvasContainer.style.width = "400px"; // Ajusta según tus necesidades
+      canvasContainer.style.height = "300px"; // Ajusta según tus necesidades
+
+      graph.width = canvasContainer.clientWidth;
+      graph.height = canvasContainer.clientHeight;
+
+    
+
+
+      this.chartInstance = new Chart(graph, config);
+    },
+    consultarServicios(){
+            // Envía los datos a la API utilizando fetch
+        const operation = "queryServiceByEntity";
+        const tna = 7;
+        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
+        const entityIdService = localStorage.getItem('id');
+        fetch(
+          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&entityIdService=${entityIdService}&key=${key}`,
+          
+          { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
+        )
+        .then(respuesta=>respuesta.json())
+        .then((datosRespuesta)=>{
+          //const servicios = datosRespuesta.arrayService;
+          console.log(datosRespuesta.arrayService)
+          const serviciosPromises = datosRespuesta.arrayService.map(servicio => {
+            console.log(`Llamando a consultarCriterios con serviceId: ${servicio.id}`);
+          console.log(servicio.id)
+          return this.consultarCriterios(servicio.id)
+            .then(({ standards, percentages }) => {
+              return { serviceId: servicio.id, standards, percentages };
+            });
+        });
+
+      Promise.all(serviciosPromises)
+        .then(serviciosInfo => {
+          // Ahora serviciosInfo contiene la información de estándares y porcentajes de cada servicio
+          
+          console.log("aqui");
+          console.log(serviciosInfo);
+          // Puedes utilizar esta información para renderizar tus gráficas
+          serviciosInfo.forEach(info => {
+            this.renderChart(`grafica_${info.serviceId}`, info.standards, info.percentages, `Ejemplo ${info.serviceId}`);
+          });
+        }).catch(error => {
+        console.error('Error al obtener información de servicios:', error);
+      });
+
+        })
+        .catch(console.log)
+    },
+    consultarCriterios(serviceId){
+            // Envía los datos a la API utilizando fetch
+        const operation = "queryCriteriaByService";
+        const tna = 7;
+        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
+        const serviceIdCriteria = serviceId;
+        fetch(
+          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&serviceIdCriteria=${serviceIdCriteria}&key=${key}`,
+          
+          { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
+        )
+        .then(respuesta=>respuesta.json())
+        .then((datosRespuesta)=>{
+          const servicios = datosRespuesta;
+          console.log(servicios); 
+
+          const criteriaByStandard = {};
+          datosRespuesta.arrayCriteria.forEach(criterio => {
+          const { standardID, description, answer } = criterio;
+          if (!criteriaByStandard[standardID]) {
+            criteriaByStandard[standardID] = [];
+          }
+          criteriaByStandard[standardID].push({ description, answer });
+        });
+
+        // Calcular el porcentaje de cumplimiento por estándar
+        const percentagesByStandard = {};
+        Object.keys(criteriaByStandard).forEach(standardID => {
+          const criterios = criteriaByStandard[standardID];
+          const cumplidos = criterios.filter(criterio => criterio.answer === 'C').length;
+          const totalCriterios = criterios.length;
+          const porcentaje = (cumplidos / totalCriterios) * 100;
+          percentagesByStandard[standardID] = porcentaje;
+        });
+
+        console.log(criteriaByStandard); // Criterios agrupados por estándar
+        console.log(percentagesByStandard); // Porcentajes de cumplimiento por estándar
+
+        return {
+          standards: Object.keys(percentagesByStandard),
+          percentages: Object.values(percentagesByStandard),
+        };
+         
+        })
+        .catch(console.log)
+    },
+  
   },
 };
 </script>
@@ -211,4 +326,10 @@ export default {
     left: 15%;
     z-index:-1;
   }
+  .chart-container {
+  text-align: center; /* Centra el contenido horizontalmente */
+ 
+  margin-bottom: 20px;
+  padding: 10px;
+}
 </style>
