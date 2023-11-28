@@ -1,5 +1,6 @@
 <template>
-
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <!-- <div>
   <label for="usuarios">Seleccionar Usuario:</label>
   <select v-model="usuarioSeleccionado" @change="cargarInformacionUsuario">
@@ -25,7 +26,70 @@
         </li>
       </ul>
     </header>
-    <h1 style="text-align: center;">Bienvenido auditor</h1>
+  </div>
+    <div class="container-fluid" style="background-color: #003e4b; width: 100%; height: 30vh;" data-aos="zoom-in">
+      <img src="../assets/auditor.png" style="height:20vh; margin-left: 30%;">
+      <div style="text-align: center; flex: 1; position: absolute; top: 30px; left: 100px; right: 0; ">
+        <h1 style="text-align: center; color: #F0F0F0;">Bienvenido auditor</h1>
+      </div>
+    </div>
+    <div class="container" style="background-color: #F0F0F0; margin-top: -10vh; border-radius: 1rem;" data-aos="zoom-in">
+      <h1 style="text-align: center; margin-top: 10px;"> No olvides lo que caracteriza a los auditores</h1>
+        <div class="wrapper">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-5 col-lg-3">
+                  
+                    <div class="card card-1" style="margin-top: 10%;">
+                        <div class="card-body">
+                            
+                            <h3 class="mbr-section-subtitle mb-2 display-7 text-center"><strong>Conocimientos</strong></h3>
+                            <p class="mbr-text mbr-fonts-style display-7" style="text-align: justify;">
+                              Los auditores en salud deben tener un conocimiento sólido de los sistemas de salud, 
+                              terminología médica, regulaciones y estándares de la industria.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-3">
+                    <div class="card card-2" style="margin-top: 10%;">
+                        <div class="card-body">
+                            
+                            <h3 class="mbr-section-subtitle mb-2 display-7 text-center"><strong>Técnica y ética profesional</strong></h3>
+                            <p class="mbr-text mbr-fonts-style display-7" style="text-align: justify;">
+                              Habilidades técnicas en auditoría y contabilidad son esenciales, 
+                              junto con altos estándares éticos para garantizar la integridad y confidencialidad de la información.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-3">
+                    <div class="card card-3" style="margin-top: 10%; margin-bottom: 10%;">
+                        <div class="card-body">
+                            
+                            <h3 class="mbr-section-subtitle mb-2 display-7 text-center"><strong>Habilidades analíticas y comunicativas</strong></h3>
+                            <p class="mbr-text mbr-fonts-style display-7" style="text-align: justify;">
+                              Los auditores deben ser capaces de analizar datos complejos, 
+                              identificar problemas y comunicar hallazgos de manera efectiva a diversas partes interesadas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 col-lg-3">
+                    <div class="card card-4" style="margin-top: 10%;">
+                        <div class="card-body">
+                            
+                            <h3 class="mbr-section-subtitle mb-2 display-7 text-center"><strong>Adaptabilidad y mejora continua</strong></h3>
+                            <p class="mbr-text mbr-fonts-style display-7" style="text-align: justify;">
+                              La capacidad para adaptarse a cambios en el entorno de la salud, mantenerse 
+                              actualizado en regulaciones y buscar constantemente mejoras en eficiencia y calidad son aspectos clave.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background-color: white !important; " data-aos="zoom-in">
     <div class="p-5 mb-4 rounded-3">
       <div class="container-fluid py-5">
         <div style="display: flex;">
@@ -51,6 +115,7 @@
         </table>
       </div>
       <!-- Tabla de estándares -->
+      <div v-if="mostrarEstandares">
         <div v-if="estandares.length > 0">
           <h2>Estandares ({{ selectedServiceName }})</h2>
         <table class="table">
@@ -71,7 +136,12 @@
             </tr>
           </tbody>
         </table>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                <button type="button" @click="cancelarEstandar" class="btn btn" style="background-color: #811111; color: #F0F0F0; margin-right: 130px;">Cancelar</button>
+        </div>
       </div>
+    </div>
+      
         <!-- Formulario de criterios -->
         <form @submit.prevent="submitForm" v-if="mostrarEstandaresCriterios">
           <div v-if="mostrarEstandaresCriterios">
@@ -129,6 +199,7 @@
       </div>
     </div>
 </div>
+
   <!-- </div> -->
     <div class="alert alert-success fixed-bottom mx-auto" v-if="mostrarMensaje">{{ mensaje }}</div>
   </template>
@@ -159,6 +230,8 @@
 </style>
 
   <script>
+import AOS from 'aos';
+import 'aos/dist/aos.css';
   export default {
     data() {
       return {
@@ -172,6 +245,7 @@
         estandares : [],
         criterios : {},
         mostrarEstandaresCriterios: false,
+        mostrarEstandares: false,
         descriptionCriteria: '',
         answerCriteria: '',
         observationCriteria: '',
@@ -212,6 +286,9 @@
     cancelarFormulario() {
       this.mostrarEstandaresCriterios = false;
     },
+    cancelarEstandar() {
+      this.mostrarEstandares= false;
+    },
       sessionClose(){
       localStorage.clear(),
       this.$router.push({name:'home'});
@@ -236,6 +313,7 @@
         // Otras lógicas si las hay
         this.consultarCriterio(estandar);
         this.selectedStandardName = estandar.name;
+        this.mostrarEstandares=true;
         this.mostrarEstandaresCriterios = true;
     },
 
@@ -280,6 +358,7 @@
     },
     consultarEstandares(serviceId){
             // Envía los datos a la API utilizando fetch
+        this.mostrarEstandares=true;
         this.mostrarEstandaresCriterios = false;
         const operation = "queryStandardByService";
         const tna = 7;
@@ -399,5 +478,8 @@
 
       },
     },
+    mounted() {
+    AOS.init();
+  }
   };
   </script>
