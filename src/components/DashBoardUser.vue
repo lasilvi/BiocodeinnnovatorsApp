@@ -52,7 +52,8 @@
               <td >{{ servicio.name }}</td>
               <td style="text-align: justify;">{{ servicio.description }}</td>
               <td>
-                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;">Ver estandares</button>
+                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: 
+                    #003e4b; color: #F0F0F0;" @click="selectedServiceName = servicio.name">Ver estandares</button>
               </td>
             </tr>
           </tbody>
@@ -61,7 +62,7 @@
 
         <!-- Nueva sección para mostrar los estándares -->
         <div v-if="estandares.length > 0">
-        <h2>Estandares</h2>
+          <h2>Estandares ({{ selectedServiceName }})</h2>
         <table class="table">
           <thead>
             <tr>
@@ -74,7 +75,8 @@
               <td>{{ estandar.name }}</td>
               <td>
                 <div class="btn-group" role="group" aria-label="">
-                  <button type="button" v-on:click="mostrarCriterios(estandar.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;"> Ver criterios </button>
+                  <button type="button" v-on:click="mostrarCriterios(estandar.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;" 
+                  @click=" selectedStandardName = estandar.name"> Ver criterios </button>
                 </div>
               </td>
             </tr>
@@ -85,15 +87,14 @@
 
         <form @submit.prevent="submitForm" v-if="mostrarEstandaresCriterios">
           <div v-if="mostrarEstandaresCriterios">
+            <h2>Criterios ({{ selectedStandardName }})</h2>
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col" style="width: 20%;">Descripción</th>
                   <th scope="col" style="width: 5%;">Respuesta</th>
                   <th scope="col" style="width: 30%;">Observación usuario</th>
-                  <th> </th>
-                  <th> </th>
-                  <th scope="col" style="width: 5%;">Archivos</th>
+                  <th scope="col" style="width: 5%;">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -112,16 +113,16 @@
                   <td>
                   <div class="btn-group" role="group" aria-label="">
                     <button type="button" @click="submitForm(criterio)" class="btn btn me-md-2" style="background-color: #117981; color: #F0F0F0">Guardar</button>
+                    &nbsp;
                     <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="23" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
                         <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
                         <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
                       </svg>
                     </button>
-                    <td>
-                      <button @click="mostrarArchivos(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;">
+                    &nbsp;
+                    <button @click="mostrarArchivos(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;">
                         Ver Archivos
                       </button>
-                    </td>
                 </div>
               </td>
               <td>
@@ -211,6 +212,8 @@
   export default {
     data() {
       return {
+        selectedStandardName: null,
+        selectedServiceName: null,
         mostrarVentanaFlotanteArchivos: false,
         dataUser:{},
         servicios: [],
@@ -240,6 +243,15 @@
     },
 
     methods: {
+      sessionClose(){
+      localStorage.clear(),
+      this.$router.push({name:'home'});
+    },
+      mostrarFormularioarchivo(criterioid) {
+        // Otras lógicas si las hay
+        this.mostrarFormulario = true;
+        this.criterioIdMostrado = criterioid; 
+      },
       mostrarCriterios(estandar) {
         // Otras lógicas si las hay
         this.consultarCriterio(estandar);
