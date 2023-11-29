@@ -136,7 +136,6 @@
             </table>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <small class="d-flex justify-content-end mt-3">
-                
                 &nbsp;
                 <button type="button" @click="cerrarFormulario" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
               </small>
