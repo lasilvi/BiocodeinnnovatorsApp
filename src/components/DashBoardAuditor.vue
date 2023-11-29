@@ -174,8 +174,6 @@
             </table>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <small class="d-flex justify-content-end mt-3">
-                <button type="submit" class="btn btn me-md-2" style="background-color: #117981; color: #F0F0F0">Guardar</button>
-                &nbsp;
                 <button type="button" @click="cancelarFormulario" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
               </small>
             </div>
@@ -238,7 +236,7 @@ import 'aos/dist/aos.css';
         listaUsuarios: [],
         usuarioSeleccionado: null,
         selectedServiceName: null,
-        selectedStandardName:null,
+        selectedStandardName: null,
         dataUser:{},
         servicios: [],
         archivos: [],
@@ -310,11 +308,10 @@ import 'aos/dist/aos.css';
       return; // Detiene la ejecución del método
     }},
     mostrar(estandar) {
-        // Otras lógicas si las hay
-        this.consultarCriterio(estandar);
-        this.selectedStandardName = estandar.name;
-        this.mostrarEstandares=true;
-        this.mostrarEstandaresCriterios = true;
+      this.selectedStandardName = estandar.name;
+      this.consultarCriterio(estandar);
+      this.mostrarEstandares = true;
+      this.mostrarEstandaresCriterios = true;
     },
 
     obtenerListaUsuarios() {
