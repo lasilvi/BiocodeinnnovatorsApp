@@ -52,8 +52,7 @@
               <td >{{ servicio.name }}</td>
               <td style="text-align: justify;">{{ servicio.description }}</td>
               <td>
-                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: 
-                    #003e4b; color: #F0F0F0;">Ver estandares</button>
+                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;">Ver estandares</button>
               </td>
             </tr>
           </tbody>
@@ -92,6 +91,8 @@
                   <th scope="col" style="width: 20%;">Descripción</th>
                   <th scope="col" style="width: 5%;">Respuesta</th>
                   <th scope="col" style="width: 30%;">Observación usuario</th>
+                  <th> </th>
+                  <th> </th>
                   <th scope="col" style="width: 5%;">Archivos</th>
                 </tr>
               </thead>
@@ -100,15 +101,17 @@
                   <td>{{ criterio.description }}</td>
                   <td>
                     <!-- Utiliza una lista desplegable para la respuesta -->
-                    <select v-model="criterio.respuestaSeleccionada">
+                    <select v-model= criterio.answer>
+                      <option :value="criterio.answer">{{ criterio.answer  }}</option>
                       <option value="C">C</option>
                       <option value="NC">NC</option>
                       <option value="NA">NA</option>
                     </select>
                 </td>
-                  <td><input type="text" v-model="criterio.observationCriteriaAuditor" placeholder="Escriba aquí su observación" style="width: 100%; height: 100%;"></td>
+                  <td><input type="text" v-model="criterio.observation" placeholder="Escriba aquí su observación" style="width: 100%; height: 100%;"></td>
                   <td>
                   <div class="btn-group" role="group" aria-label="">
+                    <button type="button" @click="submitForm(criterio)" class="btn btn me-md-2" style="background-color: #117981; color: #F0F0F0">Guardar</button>
                     <button @click="mostrarFormularioarchivo(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;border-top-right-radius:.3rem; border-bottom-right-radius: .3rem;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="23" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
                         <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
                         <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
@@ -132,7 +135,7 @@
             </table>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <small class="d-flex justify-content-end mt-3">
-                <button type="submit" class="btn btn me-md-2" style="background-color: #117981; color: #F0F0F0">Guardar</button>
+                
                 &nbsp;
                 <button type="button" @click="cerrarFormulario" class="btn btn" style="background-color: #811111; color: #F0F0F0">Cancelar</button>
               </small>
@@ -220,6 +223,7 @@
         observationCriteria: '',
         standardIdCriteria: '',
         serviceIdCriteria: '',
+        observationCriteriaAuditor : '',
         idCriteria : '',
         mensaje: "",
        mostrarMensaje: false ,
@@ -236,6 +240,11 @@
     },
 
     methods: {
+      mostrarCriterios(estandar) {
+        // Otras lógicas si las hay
+        this.consultarCriterio(estandar);
+        this.mostrarEstandaresCriterios = true;
+      },
       cerrarFormulario() {
         // Cierra el formulario estableciendo la variable en false
         this.mostrarEstandaresCriterios = false;
@@ -286,89 +295,63 @@
         this.mostrarVentanaFlotanteArchivos = false;
       },
       submitForm(criterio) {
-      // Envía los datos a la API utilizando fetch
-      const operation = "UpdateCriteria";
-      const tna = 7;
-      const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
+        // Envía los datos a la API utilizando fetch
+          // Envía los datos a la API utilizando fetch
+        const operation = "UpdateCriteria";
+        const tna = 7;
+        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
 
-      const observationCriteria = criterio.observation;
-      const descriptionCriteria = criterio.description;
-      const answerCriteria = criterio.answer;
-      const serviceIdCriteria = this.selectedservicio;
-      const standardIdCriteria = this.selectedestandar;
-      const idCriteria = criterio.id;
+        const observationCriteria = criterio.observation;
+        const observationCriteriaAuditor = criterio.observationCriteriaAuditor;
+        const descriptionCriteria = criterio.description;
+        const answerCriteria = criterio.answer;
+        const serviceIdCriteria = criterio.serviceID;
+        const standardIdCriteria = criterio.standardID;
+        const idCriteria = criterio.id;
+
+        console.log(criterio)
+        console.log(observationCriteria);
+        console.log(observationCriteriaAuditor);
+        console.log(descriptionCriteria);
+        console.log(idCriteria);
+        console.log(standardIdCriteria);
+        console.log(answerCriteria);
+       
+        
+
       fetch(
-        `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&standardIdCriteria=${standardIdCriteria}&serviceIdCriteria=${serviceIdCriteria}&idCriteria=${idCriteria}&observationCriteria=${observationCriteria}&descriptionCriteria=${descriptionCriteria}&answerCriteria=${answerCriteria}&key=${key}`,
+      
+        `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&observationCriteriaAuditor=${observationCriteriaAuditor}&standardIdCriteria=${standardIdCriteria}&serviceIdCriteria=${serviceIdCriteria}&idCriteria=${idCriteria}&observationCriteria=${observationCriteria}&descriptionCriteria=${descriptionCriteria}&answerCriteria=${answerCriteria}&key=${key}`,
         { method: "POST" } // Puedes ajustar el método HTTP según sea necesario
       )
         .then((respuesta) => respuesta.json())
         .then((datosRespuesta) => {
+          if (datosRespuesta.criteriaVO) {
+            this.mensaje = "comentario registrado";
+            
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          }
+          else {
+            // Si no se encuentra la clave userVO en la respuesta, muestra un mensaje de error
+            this.mensaje = "Hubo un error al guardar el comentario.";
+            this.mostrarMensaje = true;
+            
+            setTimeout(() => {
+              this.mostrarMensaje = false;
+              this.mensaje = "";
+            }, 5000);
+          }
           console.log(datosRespuesta);
           this.consultarCriterio(this.selectedestandar);
         })
         .catch(console.log);
-      // Limpia el formulario después de enviar los datos
-      this.descriptionCriteria = '',
-      this.answerCriteria = '',
-      this.observationCriteria = '',
-      this.standardIdCriteria =  '',
-      this.serviceIdCriteria = '',
-      this.idCriteria = ''
-      this.mostrarFormulario = true;
-      },
-      mostrarFormularioarchivo(criterioid) {
-        // Otras lógicas si las hay
-        this.mostrarFormulario = true;
-        this.criterioIdMostrado = criterioid; 
-      },
-      mostrarCriterios(estandar) {
-        // Otras lógicas si las hay
-        this.consultarCriterio(estandar);
-        this.mostrarEstandaresCriterios = true;
-      },
-      sessionClose(){
-        localStorage.clear(),
-        this.$router.push({name:'home'});
-      },
-      guardarNuevoCriterio() {
-        // Obtén los valores del formulario
-        const descriptionCriteria = this.nuevoCriterio.description;
-        const answerCriteria = this.nuevoCriterio.answer;
-        const observationCriteria = this.nuevoCriterio.observation;
-        // Otras propiedades necesarias
-        const standardIdCriteria = this.selectedestandar; // Asegúrate de que esta propiedad esté definida y tenga el valor correcto.
-        const serviceIdCriteria = this.selectedservicio; // Asegúrate de que esta propiedad esté definida y tenga el valor correcto.
-        // Envía los datos a la API utilizando fetch
-        const operation = "SaveCriteria";
-        const tna = 7;
-        const key = "c94ad623-f583-46ed-b5e0-54f402e83ad0";
-        fetch(
-          `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&descriptionCriteria=${descriptionCriteria}&answerCriteria=${answerCriteria}&observationCriteria=${observationCriteria}&standardIdCriteria=${standardIdCriteria}&serviceIdCriteria=${serviceIdCriteria}&key=${key}`,
-          { method: "POST" } // Puedes ajustar el método HTTP según sea necesario
-        )
-          .then((respuesta) => respuesta.json())
-          .then((datosRespuesta) => {
-            console.log(datosRespuesta);
-            this.consultarCriterio(this.selectedestandar)
-            if (datosRespuesta && datosRespuesta.criteriaVO) {
-              this.mensaje = "Criterio registrado exitosamente";
-            } else {
-              this.mensaje = "Criterio no registrado";
-            }
-            this.mostrarMensaje = true;
-            setTimeout(() => {
-              this.mostrarMensaje = false; // Ocultar el mensaje
-              this.mensaje = ""; // Limpiar el mensaje
-            }, 5000);
 
-            // Limpia el formulario de creación
-            this.nuevoCriterio.description = "";
-            this.nuevoCriterio.answer = "C";
-            this.nuevoCriterio.observation = "";
-          },
-          )
-          .catch(console.log);
-      },  
+      },
       queryLocalStorage(){
             this.dataUser['name'] = localStorage.getItem('name')
             this.dataUser['userid'] = localStorage.getItem('userid')
@@ -502,22 +485,14 @@
         
         fetch(
           `https://redb.qsystems.co/QS3100/QServlet?operation=${operation}&tna=${tna}&standardIdCriteria=${standardIdCriteria}&key=${key}`,
-          { method: "GET" }
+          
+          { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
         )
-
         .then(respuesta=>respuesta.json())
         .then((datosRespuesta)=>{
-        const criterios = datosRespuesta.arrayCriteria.map((criterio) => ({
-          id: criterio.id,
-          description: criterio.description,
-          answer: criterio.answer,
-          observationCriteriaAuditor: criterio.observationCriteriaAuditor,
-          // Agrega una propiedad para manejar la respuesta seleccionada
-          respuestaSeleccionada: "",
-        }));
-          this.criterios = criterios;
+          const criterios = datosRespuesta.arrayCriteria;
           console.log(criterios); 
-          
+          this.criterios = datosRespuesta.arrayCriteria;
         })
         .catch(console.log)
     },

@@ -107,8 +107,7 @@
               <td >{{ servicio.name }}</td>
               <td style="text-align: justify;">{{ servicio.description }}</td>
               <td>
-                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: 
-                    #003e4b; color: #F0F0F0;" @click="selectedServiceName = servicio.name">Ver estándares</button>
+                <button type="button" v-on:click="consultarEstandares(servicio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0;" @click="selectedServiceName = servicio.name">Ver estándares</button>
               </td>
             </tr>
           </tbody>
@@ -164,7 +163,7 @@
                   <td><input type="text" v-model="criterio.observationCriteriaAuditor" placeholder="Escriba aqui su observación" style="width: 100%; height: 100%;"></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="">
-                      <button type="submit" v-on:click="agregarcomentario(criterio.id)" class="btn btn" style="background-color: #20c2b4; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;">Agregar observación</button>
+                      <button type="submit" v-on:click="agregarcomentario(criterio)" class="btn btn" style="background-color: #20c2b4; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem;">Agregar observación</button>
                       &nbsp;
                       <button type="submit" v-on:click="consultarArchivos(criterio.id)" class="btn btn" style="background-color: #003e4b; color: #F0F0F0; border-top-right-radius: .3rem; border-bottom-right-radius: .3rem; border-top-left-radius: .3rem; border-bottom-left-radius: .3rem;">Ver anexos</button>
                     </div>
