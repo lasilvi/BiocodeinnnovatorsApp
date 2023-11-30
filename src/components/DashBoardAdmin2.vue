@@ -80,35 +80,16 @@
         </ul>
       </header>
       <div class="main-content" style="margin-left: 300px;">
+        <div class="row">
       <div class="chart-container">
-          <canvas id="grafica1"></canvas>
-      </div>
-      <div class="chart-container">
-          <canvas id="grafica2"></canvas>
-      </div>
+            <canvas id="grafica1"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="grafica2"></canvas>
+        </div>
+    </div>
     </div> 
     <div class="background-container" style="text-align: justify;">
-    <div class="dashboard-content" style="text-align:center; margin-right: 10%; margin-top: 1%; margin-left: 2%;">
-      <br>
-        <h1>Bienvenido al Dashboard del Administrador</h1>
-
-        <p style="text-align: justify; padding-left: 10%; margin-right: 10%;">
-            Como administrador del sistema, se pueden realizar las siguientes acciones:
-        </p>
-
-        <ol class="list-group-numbered" style="text-align: justify; padding-left: 10%; margin-right: 10%;">
-            <li class="list-group-item">Crear y gestionar cuentas de usuario para las organizaciones de salud, permitiéndoles acceder a la herramienta y visualizar el estado de sus autoevaluaciones.</li>
-            <li class="list-group-item">Definir y mantener una lista de estándares de habilitación específicos para Colombia, brindando a las organizaciones la capacidad de evaluar su cumplimiento.</li>
-            <li class="list-group-item">Definir y mantener una lista de servicios en los cuales se llevará a cabo la autoevaluación de condiciones de habilitación.</li>
-            <li class="list-group-item">Crear y gestionar listas de chequeo que asocien el cumplimiento de condiciones de habilitación de cada servicio en el que se realizará la autoevaluación de condiciones de habilitación.</li>
-        </ol>
-
-        <p style="text-align: justify; padding-left: 10%; margin-right: 10%;">
-            Los administradores también contarán con la capacidad de realizar estas acciones para garantizar un adecuado funcionamiento del sistema.
-        </p>
-        
-    </div>
-    
 </div>
 </div>
   
@@ -122,8 +103,9 @@ console.log(localStorage.getItem('id'))
 export default {
   mounted() {
     
-    this.renderChart('grafica1', ['Enero', 'Febrero', 'Marzo', 'Abril'], [1, 2, 3, 4], 'Ejemplo 1');
-    this.renderChart('grafica2', ['Enero2', 'Febrero', 'Marzo', 'Abril'], [1, 2, 3, 4], 'Ejemplo 1');
+    this.renderChart('grafica1', ['DOTACION', 'TALENTO HUMANO', 'INFRAESTRUCTURA', 'MEDICAMENTOS'], [66.6, 33.3, 66.6, 100], 'SERVICIO DE CIRUGIA');
+    this.renderChart('grafica2', ['DOTACION', 'TALENTO HUMANO', 'INFRAESTRUCTURA', 'MEDICAMENTOS'], [100, 33.3, 66.6, 33.3], 'SERVICIO DE CONSULTA EXTERNA GENERAL');
+    
 
   },
   data() {
@@ -159,7 +141,7 @@ export default {
     }},
     
 
-  sessionClose(){
+   sessionClose(){
       localStorage.clear(),
       this.$router.push({name:'home'});
     },
@@ -207,34 +189,43 @@ export default {
           { method: "GET" } // Puedes ajustar el método HTTP según sea necesario
         )
         .then(respuesta=>respuesta.json())
-        .then((datosRespuesta)=>{
-          //const servicios = datosRespuesta.arrayService;
-          console.log(datosRespuesta.arrayService)
-          const serviciosPromises = datosRespuesta.arrayService.map(servicio => {
-            console.log(`Llamando a consultarCriterios con serviceId: ${servicio.id}`);
-          console.log(servicio.id)
-          return this.consultarCriterios(servicio.id)
-            .then(({ standards, percentages }) => {
-              return { serviceId: servicio.id, standards, percentages };
-            });
+        .then((datosRespuesta) => {
+        const serviciosPromises = datosRespuesta.arrayService.map((servicio) => {
+          console.log(`Llamando a consultarCriterios con serviceId: ${servicio.id}`);
+          console.log(servicio.id);
+          return this.consultarCriterios(servicio.id).then(({ standards, percentages }) => {
+            return { serviceId: servicio.id, standards, percentages };
+          });
         });
 
-      Promise.all(serviciosPromises)
-        .then(serviciosInfo => {
-          // Ahora serviciosInfo contiene la información de estándares y porcentajes de cada servicio
-          
-          console.log("aqui");
-          console.log(serviciosInfo);
-          // Puedes utilizar esta información para renderizar tus gráficas
-          serviciosInfo.forEach(info => {
-            this.renderChart(`grafica_${info.serviceId}`, info.standards, info.percentages, `Ejemplo ${info.serviceId}`);
-          });
-        }).catch(error => {
-        console.error('Error al obtener información de servicios:', error);
-      });
+        Promise.all(serviciosPromises)
+          .then((serviciosInfo) => {
+            // Ahora serviciosInfo contiene la información de estándares y porcentajes de cada servicio
+            console.log("aqui");
+            console.log(serviciosInfo);
+            // Puedes utilizar esta información para renderizar tus gráficas
 
-        })
-        .catch(console.log)
+            serviciosInfo.forEach((info) => {
+              info.standards.forEach((standard, index) => {
+                // Accede al estándar y porcentaje correspondiente
+                const standardId = standard;
+                console.log(standardId)
+                const percentage = info.percentages[index];
+                console.log("aqui")
+                // Ahora tienes el serviceId, standardId y percentage que puedes utilizar según tus necesidades
+                console.log(`Service ID: ${info.serviceId}, Standard ID: ${standardId}, Percentage: ${percentage}`);
+              });
+
+              // Puedes llamar a tu función de renderización aquí, pasando info.serviceId, info.standards y info.percentages
+              // this.renderChart(`grafica_${info.serviceId}`, info.standards, info.percentages, `Ejemplo ${info.serviceId}`);
+            });
+          })
+          .catch((error) => {
+            console.error('Error al obtener información de servicios:', error);
+          });
+      })
+.catch(console.log);
+
     },
     consultarCriterios(serviceId){
             // Envía los datos a la API utilizando fetch
@@ -269,17 +260,21 @@ export default {
           const totalCriterios = criterios.length;
           const porcentaje = (cumplidos / totalCriterios) * 100;
           percentagesByStandard[standardID] = porcentaje;
-        });
 
-        console.log(criteriaByStandard); // Criterios agrupados por estándar
+          console.log(criteriaByStandard); // Criterios agrupados por estándar
         console.log(percentagesByStandard); // Porcentajes de cumplimiento por estándar
 
+        });
+
+        
         return {
           standards: Object.keys(percentagesByStandard),
           percentages: Object.values(percentagesByStandard),
+          
         };
-         
-        })
+        }
+        
+        )
         .catch(console.log)
     },
   
